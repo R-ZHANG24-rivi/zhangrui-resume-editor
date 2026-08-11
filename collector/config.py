@@ -13,15 +13,24 @@ TARGET_CITIES = ["北京"]
 # 其他可接受城市（如需扩面可在此追加，例如 "上海"）
 SECONDARY_CITIES = []
 
-# ── 岗位关键词（按匹配优先级，越靠前越优先） ──────────
-ROLE_KEYWORDS = [
+# ── 岗位关键词：正向命中即视为目标方向 ──────────────
+ROLE_POSITIVE = [
     # 设计类（核心）
-    "交互设计", "视觉设计", "AIGC设计", "AIGC", "UI设计", "UX设计",
+    "交互设计", "视觉设计", "AIGC", "UI设计", "UX设计",
     "体验设计", "用户研究", "产品设计", "界面设计", "动效设计",
-    "视觉", "设计", "设计师",
+    "游戏UI", "游戏设计", "视觉", "交互", "UI", "UX",
+    "产品设计师",
     # 产品类
     "产品经理", "产品策划", "商业产品经理", "策略产品经理",
     "AI产品经理", "数据产品经理", "产品运营",
+]
+
+# ── 负向排除：即使含"设计"也算非目标（各类工程设计岗） ──
+ROLE_NEGATIVE = [
+    "热设计", "硬件设计", "结构设计", "光学设计", "机械设计",
+    "电气设计", "土建", "工业设计", "暖通", "模具设计", "工艺设计",
+    "服装设计", "环艺", "室内设计", "算法", "嵌入式",
+    "开发", "测试", "运维", "研发", "工程",
 ]
 
 # ── 重点公司清单（类型 → 公司名/别名） ──────────────
@@ -88,10 +97,27 @@ def is_priority_company(company: str) -> bool:
 
 
 def matches_role(title: str) -> bool:
-    """岗位标题是否匹配目标角色方向"""
+    """岗位标题是否匹配目标角色方向（正向命中且不含负向词）"""
     if not title:
         return False
-    return any(kw in title for kw in ROLE_KEYWORDS)
+    if any(neg in title for neg in ROLE_NEGATIVE):
+        return False
+    return any(pos in title for pos in ROLE_POSITIVE)
+
+
+def role_type(title: str) -> str | None:
+    """返回 'design' / 'product' / None，用于评分与排序"""
+    if not title:
+        return None
+    if any(neg in title for neg in ROLE_NEGATIVE):
+        return None
+    if any(k in title for k in
+           ["交互", "视觉", "AIGC", "UI", "UX", "体验",
+            "游戏UI", "产品设计", "界面", "动效", "用户研究"]):
+        return "design"
+    if "产品" in title:
+        return "product"
+    return None
 
 
 def is_target_city(city: str) -> bool:
@@ -123,9 +149,9 @@ def priority_score(job: dict) -> int:
     score += city_priority(job.get("city", ""))
     if is_priority_company(job.get("company", "")):
         score += 3
-    title = job.get("title", "")
-    if any(kw in title for kw in ["交互", "视觉", "AIGC", "UI", "UX", "体验", "设计", "研究"]):
+    rt = role_type(job.get("title", ""))
+    if rt == "design":
         score += 2
-    elif "产品" in title:
+    elif rt == "product":
         score += 1
     return score

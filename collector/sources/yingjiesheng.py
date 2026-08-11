@@ -81,14 +81,20 @@ def collect_yingjiesheng() -> list[dict]:
 
             soup = BeautifulSoup(resp.text, "lxml")
 
-            # 岗位列表通常在 ul 或 div 中
-            items = soup.select("ul.info-list li, div.job-item, ul.jobList li")
+            # 解析岗位：优先列表选择器，失败则扫描全部链接
+            items = soup.select(
+                "ul.info-list li, div.job-item, ul.jobList li, "
+                ".jobList a, .info-list a"
+            )
             if not items:
-                # 尝试更通用的选择器
-                items = soup.find_all("li")
+                items = soup.find_all("a", href=True)
 
             for item in items:
-                link = item.find("a", href=True)
+                # 优先取链接；若 item 本身不是 a，则取内部第一个 a
+                if item.name == "a":
+                    link = item
+                else:
+                    link = item.find("a", href=True)
                 if not link:
                     continue
 
@@ -96,10 +102,12 @@ def collect_yingjiesheng() -> list[dict]:
                 raw_title = link.get_text(strip=True)
 
                 # 跳过无关内容
-                if len(raw_title) < 4 or "更多" in raw_title or "下一页" in raw_title:
+                if (len(raw_title) < 4 or "更多" in raw_title
+                        or "下一页" in raw_title
+                        or raw_title in ("首页", "上一页", "尾页")):
                     continue
 
-                # 检查是否与校招/产品/设计相关
+                # 检查是否与目标角色相关
                 if not matches_role(raw_title):
                     continue
 

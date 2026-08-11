@@ -216,14 +216,17 @@ def collect_boss_playwright() -> list[dict]:
         for query in BOSS_QUERIES:
             try:
                 url = (f"{BOSS_URL}?query={query}"
-                       f"&city=101010100&experience=104&page=1")  # 101010100 = 北京
+                       f"&city=101010100&page=1")  # 101010100 = 北京
                 page.goto(url, wait_until="domcontentloaded", timeout=45000)
-                page.wait_for_timeout(4000)
+                page.wait_for_timeout(5000)
 
-                # 检测反爬验证页
+                # 检测反爬验证页 / 登录拦截
                 page_text = page.evaluate("document.body ? document.body.innerText : ''")
                 if "安全验证" in page_text or "验证码" in page_text or "访问过于频繁" in page_text:
                     print(f"  [WARN] Boss 直聘 '{query}' 触发反爬验证，跳过")
+                    continue
+                if "login" in page.url.lower() or "请登录" in page_text or "登录后" in page_text:
+                    print(f"  [WARN] Boss 直聘 '{query}' 需要登录，跳过")
                     continue
 
                 page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
