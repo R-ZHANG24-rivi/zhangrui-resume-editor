@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="张睿的秋招投递工作台与可编辑 A4 简历工坊。">
   <title>张睿｜Career OS</title>
-  <link rel="stylesheet" href="styles.css?v=20260811-career-os">
+  <link rel="stylesheet" href="styles.css?v=20260811-collector">
 </head>
 <body>
   <header class="career-header">
@@ -36,9 +36,10 @@
           <button class="command-button primary" id="addJobButton" type="button">＋ 录入岗位</button>
           <button class="command-button" id="importJobsButton" type="button">导入 JSON</button>
           <input id="jobsImportInput" type="file" accept="application/json,.json" hidden>
+          <button class="command-button primary" id="fetchJobsButton" type="button">从采集源刷新</button>
           <button class="command-button" id="sendBriefingButton" type="button">推送今日简报 ↗</button>
         </div>
-        <p><i></i>每日 08:00 采集规则已配置 · <button id="collectorInfoButton" type="button">待接入采集器</button></p>
+        <p><i id="collectorBulb"></i><span id="collectorStatus">每日 08:00 自动采集 · GitHub Actions 运行中</span></p>
       </div>
     </section>
 
@@ -422,7 +423,7 @@
   </dialog>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="script.js?v=20260811-career-os"></script>
-  <script src="workspace.js?v=20260811-career-os"></script>
+  <script src="script.js?v=20260811-collector"></script>
+  <script src="workspace.js?v=20260811-collector"></script>
 </body>
 </html>

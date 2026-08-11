@@ -34,7 +34,9 @@ const dom = {
   feishuSettings: document.querySelector('#feishuSettingsButton'),
   sendBriefing: document.querySelector('#sendBriefingButton'),
   testFeishu: document.querySelector('#testFeishuButton'),
-  collectorInfo: document.querySelector('#collectorInfoButton'),
+  fetchJobs: document.querySelector('#fetchJobsButton'),
+  collectorStatus: document.querySelector('#collectorStatus'),
+  collectorBulb: document.querySelector('#collectorBulb'),
   collectorDialog: document.querySelector('#collectorDialog'),
   versionDialog: document.querySelector('#versionDialog'),
   versionForm: document.querySelector('#versionForm'),
@@ -536,8 +538,80 @@ async function sendSingleJobToFeishu() {
   }
 }
 
+async function fetchRemoteJobs() {
+  const original = dom.fetchJobs.textContent;
+  dom.fetchJobs.disabled = true;
+  dom.fetchJobs.textContent = '正在采集...';
+  dom.collectorBulb.style.background = '#ff9d34';
+  dom.collectorStatus.textContent = '正在从 GitHub 拉取最新岗位...';
+
+  try {
+    // 从 GitHub Raw 获取最新的采集结果
+    const repoUrl = 'https://raw.githubusercontent.com/R-ZHANG24-rivi/zhangrui-resume-editor/main/jobs.json';
+    const response = await fetch(repoUrl, { cache: 'no-store' });
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+
+    const data = await response.json();
+    const incoming = Array.isArray(data) ? data : data.jobs;
+
+    if (!Array.isArray(incoming) || incoming.length === 0) {
+      throw new Error('采集结果中没有岗位数据');
+    }
+
+    const known = new Set(jobs.map(dedupeKey));
+    let added = 0;
+    incoming.forEach((raw) => {
+      const job = normalizeJob(raw);
+      if (!job.company || !job.title || !job.city || !job.batch || known.has(dedupeKey(job))) return;
+      jobs.unshift(job);
+      known.add(dedupeKey(job));
+      added += 1;
+    });
+
+    renderAll();
+    const exportedAt = data.exportedAt ? new Date(data.exportedAt).toLocaleString('zh-CN') : '未知';
+    dom.collectorBulb.style.background = '#4fd49e';
+    dom.collectorStatus.textContent = `上次采集: ${exportedAt} · 共 ${incoming.length} 条`;
+    notify(`刷新完成：新增 ${added} 条，共 ${incoming.length} 条可导入`, 3800);
+  } catch (error) {
+    dom.collectorBulb.style.background = '#ff6b3d';
+    dom.collectorStatus.textContent = `采集失败: ${error.message} · 可手动导入或等下次自动采集`;
+    notify(`采集失败: ${error.message}。请检查 GitHub Pages 部署状态或手动导入`, 5000);
+  } finally {
+    dom.fetchJobs.disabled = false;
+    dom.fetchJobs.textContent = original;
+  }
+}
+
+// 启动时尝试检查采集状态
+(async function checkCollectorStatus() {
+  try {
+    const repoUrl = 'https://raw.githubusercontent.com/R-ZHANG24-rivi/zhangrui-resume-editor/main/jobs.json';
+    const response = await fetch(repoUrl, { method: 'HEAD', cache: 'no-store' });
+    if (response.ok) {
+      const lastModified = response.headers.get('last-modified');
+      const dateStr = lastModified ? new Date(lastModified).toLocaleString('zh-CN') : '';
+      dom.collectorBulb.style.background = '#4fd49e';
+      dom.collectorStatus.textContent = dateStr
+        ? `采集数据就绪 · 上次更新: ${dateStr}`
+        : '采集数据就绪 · 点击刷新获取最新岗位';
+    } else {
+      dom.collectorBulb.style.background = '#ff9d34';
+      dom.collectorStatus.textContent = '首次使用？请先部署 GitHub Actions 或手动导入岗位';
+    }
+  } catch {
+    // 网络不可用时静默忽略
+    dom.collectorBulb.style.background = '#888';
+    dom.collectorStatus.textContent = '离线模式 · 请联网后刷新';
+  }
+})();
+
 dom.tabs.forEach((tab) => tab.addEventListener('click', () => selectWorkspace(tab.dataset.workspaceTarget)));
 dom.addJob.addEventListener('click', () => openJobDialog());
+dom.fetchJobs.addEventListener('click', fetchRemoteJobs);
 dom.jobForm.addEventListener('submit', (event) => {
   if (event.submitter?.value === 'cancel') return;
   event.preventDefault();
@@ -628,7 +702,6 @@ dom.importInput.addEventListener('change', async () => {
 dom.exportJobs.addEventListener('click', exportJSON);
 
 dom.feishuSettings.addEventListener('click', openFeishuSettings);
-dom.collectorInfo.addEventListener('click', () => dom.collectorDialog.showModal());
 dom.feishuForm.addEventListener('submit', (event) => {
   if (event.submitter?.value === 'cancel') return;
   event.preventDefault();
