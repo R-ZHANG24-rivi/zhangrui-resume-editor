@@ -29,6 +29,11 @@ except ImportError:
         is_target_city,
     )
 
+try:
+    from ..cookies import apply_cookies, yjs_cookies_from_env
+except ImportError:
+    from cookies import apply_cookies, yjs_cookies_from_env
+
 BASE_URL = "https://www.yingjiesheng.com"
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
@@ -132,7 +137,12 @@ def _collect_with_playwright() -> list[dict]:
     seen: set = set()
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True, args=["--no-sandbox"])
-        page = browser.new_page()
+        context = browser.new_context()
+        # 注入登录态 Cookie（若已配置 YJS_COOKIES Secret），绕过登录墙
+        n_cookies = apply_cookies(context, yjs_cookies_from_env(), "yingjiesheng.com")
+        if n_cookies:
+            print(f"  [INFO] 已注入 {n_cookies} 条应届生求职网 Cookie（登录态）")
+        page = context.new_page()
         page.set_default_timeout(20000)
         for pageno in range(1, 4):
             try:

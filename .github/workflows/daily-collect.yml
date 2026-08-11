@@ -36,6 +36,12 @@ jobs:
 
       - name: Run collector
         id: collector
+        env:
+          # 登录态 Cookie（在仓库 Settings → Secrets → Actions 中配置后可提升采集覆盖）
+          # BOSS_COOKIES: 从 Boss 直聘登录后的 Cookie 复制（格式 "k=v; k2=v2"）
+          # YJS_COOKIES: 从应届生求职网登录后的 Cookie 复制
+          BOSS_COOKIES: ${{ secrets.BOSS_COOKIES }}
+          YJS_COOKIES: ${{ secrets.YJS_COOKIES }}
         run: |
           python collector/main.py --output jobs.json
           python - <<'PY' >> $GITHUB_OUTPUT

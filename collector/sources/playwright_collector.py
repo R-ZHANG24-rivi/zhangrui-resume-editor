@@ -27,6 +27,11 @@ except ImportError:
         is_target_city,
     )
 
+try:
+    from ..cookies import apply_cookies, boss_cookies_from_env
+except ImportError:
+    from cookies import apply_cookies, boss_cookies_from_env
+
 # 牛客网校招职位页
 NOWCODER_JOBS_URL = "https://www.nowcoder.com/jobs/school/jobs"
 # Boss 直聘校招搜索
@@ -212,6 +217,11 @@ def collect_boss_playwright() -> list[dict]:
             locale="zh-CN",
         )
         page = context.new_page()
+
+        # 注入登录态 Cookie（若已配置 BOSS_COOKIES Secret），绕过反爬/登录墙
+        n_cookies = apply_cookies(context, boss_cookies_from_env(), "zhipin.com")
+        if n_cookies:
+            print(f"  [INFO] 已注入 {n_cookies} 条 Boss 直聘 Cookie（登录态）")
 
         for query in BOSS_QUERIES:
             cards = []
