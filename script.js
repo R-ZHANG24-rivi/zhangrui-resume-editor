@@ -32,6 +32,7 @@ const toast = document.querySelector('#toast');
 let editing = true;
 let saveTimer;
 let toastTimer;
+let suppressUnloadSave = false;
 let cropState = {
   source: '',
   naturalWidth: 0,
@@ -332,12 +333,9 @@ cropStage.addEventListener('keydown', (event) => {
 
 resetButton.addEventListener('click', () => {
   if (!window.confirm('确定恢复初始简历吗？当前浏览器中的修改将被覆盖。')) return;
+  suppressUnloadSave = true;
   localStorage.removeItem(STORAGE_KEY);
-  page.innerHTML = defaultMarkup;
-  hydrateModules();
-  setEditing(true);
-  updateOverflowStatus();
-  showToast('已恢复初始简历');
+  location.reload();
 });
 
 exportButton.addEventListener('click', () => {
@@ -349,7 +347,9 @@ exportButton.addEventListener('click', () => {
 
 window.addEventListener('afterprint', () => setEditing(true));
 window.addEventListener('resize', updateOverflowStatus);
-window.addEventListener('beforeunload', () => saveResume(true));
+window.addEventListener('beforeunload', () => {
+  if (!suppressUnloadSave) saveResume(true);
+});
 
 document.addEventListener('keydown', (event) => {
   if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 's') {
@@ -365,3 +365,16 @@ if (savedMarkup) {
 hydrateModules();
 setEditing(true);
 updateOverflowStatus();
+
+window.resumeAPI = {
+  getMarkup: cleanMarkup,
+  getDefaultMarkup: () => defaultMarkup,
+  save: () => saveResume(true),
+  updateOverflow: updateOverflowStatus,
+  restoreMarkup(markup) {
+    if (!markup) return;
+    suppressUnloadSave = true;
+    localStorage.setItem(STORAGE_KEY, markup);
+    location.reload();
+  },
+};

@@ -3,31 +3,136 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="张睿的可编辑 A4 简历：直接修改内容、增删模块并导出 PDF。">
-  <title>张睿｜简历编辑器</title>
+  <meta name="description" content="张睿的秋招投递工作台与可编辑 A4 简历工坊。">
+  <title>张睿｜Career OS</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="app-bar">
-    <div class="brand">
-      <span class="brand-mark">R</span>
-      <div>
-        <strong>张睿的简历工坊</strong>
-        <span>直接编辑 · A4 排版 · 本地保存</span>
-      </div>
-    </div>
-
-    <div class="toolbar" aria-label="简历编辑工具">
-      <span class="page-status" id="pageStatus"><i></i>A4 单页</span>
-      <button class="tool-button" id="editToggle" type="button">完成编辑</button>
-      <button class="tool-button" id="addSectionButton" type="button">＋ 添加模块</button>
-      <button class="tool-button" id="saveButton" type="button">保存</button>
-      <button class="tool-button quiet" id="resetButton" type="button">恢复默认</button>
-      <button class="tool-button primary" id="exportButton" type="button">导出 PDF</button>
+  <header class="career-header">
+    <a class="career-brand" href="#workbench" aria-label="张睿 Career OS 首页">
+      <span class="career-monogram">RZ</span>
+      <span><b>Career OS</b><small>张睿的秋招指挥台</small></span>
+    </a>
+    <nav class="workspace-tabs" aria-label="工作区切换">
+      <button class="workspace-tab is-active" data-workspace-target="workbench" type="button"><i>01</i>秋招投递工作台</button>
+      <button class="workspace-tab" data-workspace-target="resume" type="button"><i>02</i>简历编辑台</button>
+    </nav>
+    <div class="header-actions">
+      <span class="local-badge"><i></i>数据仅存本机</span>
+      <button class="header-button" id="feishuSettingsButton" type="button">飞书推送设置</button>
     </div>
   </header>
 
-  <main class="workspace">
+  <main class="career-workspace" id="workbenchWorkspace" data-workspace="workbench">
+    <section class="workbench-hero">
+      <div>
+        <p class="eyebrow">AUTUMN RECRUITMENT · 2027</p>
+        <h1>把每一次投递，变成<br><em>可复盘的进展。</em></h1>
+        <p class="hero-copy">岗位采集、截止预警、投递进度与 JD 简历版本，都集中在一个工作台里。</p>
+      </div>
+      <div class="hero-command">
+        <div class="command-date"><span id="todayLabel">TODAY</span><strong id="todayDate">--</strong></div>
+        <div class="command-actions">
+          <button class="command-button primary" id="addJobButton" type="button">＋ 录入岗位</button>
+          <button class="command-button" id="importJobsButton" type="button">导入 JSON</button>
+          <input id="jobsImportInput" type="file" accept="application/json,.json" hidden>
+          <button class="command-button" id="sendBriefingButton" type="button">推送今日简报 ↗</button>
+        </div>
+        <p><i></i>每日 08:00 采集规则已配置 · <button id="collectorInfoButton" type="button">待接入采集器</button></p>
+      </div>
+    </section>
+
+    <section class="metric-grid" aria-label="求职数据概览">
+      <article class="metric-card signal"><span>过去 24H 新增</span><strong id="metricNew">0</strong><small>NEW ROLES</small></article>
+      <article class="metric-card"><span>累计投递</span><strong id="metricApplied">0</strong><small>APPLICATIONS</small></article>
+      <article class="metric-card"><span>面试转化率</span><strong id="metricInterview">0%</strong><small>INTERVIEW RATE</small></article>
+      <article class="metric-card warning"><span>7 天内截止</span><strong id="metricUrgent">0</strong><small>DEADLINE ALERT</small></article>
+    </section>
+
+    <section class="dashboard-grid">
+      <article class="dash-panel today-panel">
+        <div class="panel-heading">
+          <div><span class="panel-index">01</span><h2>今日新增岗位</h2></div>
+          <span class="panel-meta">过去 24 小时</span>
+        </div>
+        <div class="today-list" id="todayJobs"></div>
+      </article>
+
+      <article class="dash-panel deadline-panel">
+        <div class="panel-heading">
+          <div><span class="panel-index">02</span><h2>待投递清单</h2></div>
+          <span class="panel-meta">优先级排序</span>
+        </div>
+        <div class="deadline-list" id="deadlineJobs"></div>
+      </article>
+
+      <article class="dash-panel pipeline-panel">
+        <div class="panel-heading">
+          <div><span class="panel-index">03</span><h2>投递进度</h2></div>
+          <span class="panel-meta">实时状态</span>
+        </div>
+        <div class="pipeline-chart" id="pipelineChart"></div>
+      </article>
+
+      <article class="dash-panel targets-panel">
+        <div class="panel-heading">
+          <div><span class="panel-index">04</span><h2>目标公司池</h2></div>
+          <span class="panel-meta" id="targetCount">0 家关注</span>
+        </div>
+        <div class="target-cloud" id="targetCompanies"></div>
+      </article>
+    </section>
+
+    <section class="job-database">
+      <div class="database-heading">
+        <div><p class="eyebrow">MASTER DATABASE</p><h2>岗位总库</h2></div>
+        <div class="database-note"><i></i><span>按 公司 + 岗位 + 城市 + 批次 自动去重</span></div>
+      </div>
+      <div class="filter-bar">
+        <label class="search-field"><span>⌕</span><input id="jobSearch" type="search" placeholder="搜索公司或岗位名称"></label>
+        <select id="cityFilter" aria-label="按城市筛选"><option value="">全部城市</option></select>
+        <select id="batchFilter" aria-label="按招聘批次筛选"><option value="">全部批次</option></select>
+        <select id="statusFilter" aria-label="按投递状态筛选"><option value="">全部状态</option></select>
+        <button class="filter-reset" id="resetFiltersButton" type="button">重置筛选</button>
+      </div>
+      <div class="job-table-wrap">
+        <table class="job-table">
+          <thead><tr><th>目标</th><th>公司 / 岗位</th><th>城市</th><th>批次</th><th>发布日期</th><th>截止倒计时</th><th>信息来源</th><th>投递状态</th><th></th></tr></thead>
+          <tbody id="jobTableBody"></tbody>
+        </table>
+      </div>
+      <div class="table-footer"><span id="jobTableCount">共 0 个岗位</span><button id="exportJobsButton" type="button">导出岗位数据 JSON ↓</button></div>
+    </section>
+  </main>
+
+  <main class="resume-studio is-hidden" id="resumeWorkspace" data-workspace="resume">
+    <section class="resume-commandbar">
+      <div><p class="eyebrow">RESUME STUDIO</p><h1>简历编辑台</h1></div>
+      <div class="toolbar" aria-label="简历编辑工具">
+        <span class="page-status" id="pageStatus"><i></i>A4 单页</span>
+        <button class="tool-button" id="editToggle" type="button">完成编辑</button>
+        <button class="tool-button" id="addSectionButton" type="button">＋ 添加模块</button>
+        <button class="tool-button" id="saveButton" type="button">保存</button>
+        <button class="tool-button quiet" id="resetButton" type="button">恢复默认</button>
+        <button class="tool-button primary" id="exportButton" type="button">导出 PDF</button>
+      </div>
+    </section>
+    <div class="resume-layout">
+      <aside class="version-sidebar">
+        <div class="version-heading"><span>VERSION ARCHIVE</span><h2>简历版本</h2><p>母版与每一份 JD 定制简历都保存在当前浏览器。</p></div>
+        <article class="master-card">
+          <div class="master-icon">M</div>
+          <div><span>STANDARD MASTER</span><h3>标准简历母版</h3><small id="masterUpdatedAt">尚未创建快照</small></div>
+          <button id="restoreMasterButton" type="button">恢复</button>
+        </article>
+        <div class="version-actions">
+          <button id="saveVersionButton" type="button">＋ 保存当前为 JD 版本</button>
+          <button id="updateMasterButton" type="button">更新标准母版</button>
+        </div>
+        <div class="version-divider"><span>JD VERSION HISTORY</span><i></i></div>
+        <div class="version-list" id="resumeVersionList"></div>
+      </aside>
+      <section class="resume-canvas-area">
     <div class="workspace-note">
       <strong id="saveState">修改会自动保存在本机</strong>
       <span>点击文字即可修改；悬停模块可移动或删除；点击照片可替换。</span>
@@ -174,6 +279,8 @@
         </footer>
       </article>
     </div>
+      </section>
+    </div>
   </main>
 
   <dialog class="photo-dialog" id="photoDialog">
@@ -241,7 +348,81 @@
     </form>
   </dialog>
 
+  <dialog class="career-dialog job-dialog" id="jobDialog">
+    <form method="dialog" id="jobForm">
+      <div class="career-dialog-heading">
+        <div><span>ROLE RECORD</span><h2 id="jobDialogTitle">录入岗位</h2><p>官网链接与时间信息会用于核验和截止提醒。</p></div>
+        <button class="dialog-close" value="cancel" aria-label="关闭">×</button>
+      </div>
+      <input id="jobId" name="jobId" type="hidden">
+      <div class="form-grid">
+        <label><span>公司名称 *</span><input id="jobCompany" name="company" required placeholder="例如：腾讯"></label>
+        <label><span>岗位名称 *</span><input id="jobTitle" name="title" required placeholder="例如：AI 产品经理"></label>
+        <label><span>工作城市 *</span><input id="jobCity" name="city" required placeholder="例如：北京"></label>
+        <label><span>招聘批次 *</span><input id="jobBatch" name="batch" required placeholder="例如：2027 秋招"></label>
+        <label class="wide"><span>岗位官网链接</span><input id="jobUrl" name="url" type="url" placeholder="https://..."></label>
+        <label><span>发布时间</span><input id="jobPublishedAt" name="publishedAt" type="datetime-local"></label>
+        <label><span>投递截止时间</span><input id="jobDeadline" name="deadline" type="datetime-local"></label>
+        <label><span>信息来源</span><input id="jobSource" name="source" placeholder="官网 / 牛客 / 公众号"></label>
+        <label><span>岗位核验</span><select id="jobVerification" name="verification"><option>已核验</option><option>待核验</option></select></label>
+        <label><span>投递状态</span><select id="jobStatus" name="status"></select></label>
+        <label class="check-field"><input id="jobTarget" name="target" type="checkbox"><span>加入目标公司池</span></label>
+        <label class="wide"><span>备注 / 复盘</span><textarea id="jobNotes" name="notes" rows="3" placeholder="网申要求、内推人、笔面试复盘……"></textarea></label>
+      </div>
+      <div class="career-dialog-actions">
+        <button class="danger-text is-hidden" id="deleteJobButton" type="button">删除岗位</button>
+        <button class="dialog-button ghost is-hidden" id="sendJobToFeishuButton" type="button">推送此岗位到飞书</button><span></span>
+        <button class="dialog-button ghost" value="cancel">取消</button>
+        <button class="dialog-button solid" type="submit">保存岗位</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="career-dialog version-dialog" id="versionDialog">
+    <form method="dialog" id="versionForm">
+      <div class="career-dialog-heading">
+        <div><span>JD SNAPSHOT</span><h2>保存 JD 简历版本</h2><p>保存后可随时恢复，不会影响标准母版。</p></div>
+        <button class="dialog-close" value="cancel" aria-label="关闭">×</button>
+      </div>
+      <div class="form-grid">
+        <label class="wide"><span>版本名称 *</span><input id="versionName" required placeholder="例如：腾讯 - AI 产品经理 - V1"></label>
+        <label><span>目标公司</span><input id="versionCompany" placeholder="腾讯"></label>
+        <label><span>目标岗位</span><input id="versionRole" placeholder="AI 产品经理"></label>
+        <label class="wide"><span>JD 关键词</span><textarea id="versionKeywords" rows="3" placeholder="用户研究、AI Agent、数据分析、跨团队协作"></textarea></label>
+      </div>
+      <div class="career-dialog-actions"><span></span><button class="dialog-button ghost" value="cancel">取消</button><button class="dialog-button solid" type="submit">保存版本</button></div>
+    </form>
+  </dialog>
+
+  <dialog class="career-dialog feishu-dialog" id="feishuDialog">
+    <form method="dialog" id="feishuForm">
+      <div class="career-dialog-heading">
+        <div><span>FEISHU DELIVERY</span><h2>飞书推送设置</h2><p>Webhook 仅保存在此浏览器，不会上传到 GitHub。</p></div>
+        <button class="dialog-close" value="cancel" aria-label="关闭">×</button>
+      </div>
+      <label class="stack-field"><span>飞书自定义机器人 Webhook</span><input id="feishuWebhook" type="url" placeholder="https://open.feishu.cn/open-apis/bot/v2/hook/..."><small>在飞书群聊 → 设置 → 群机器人中创建自定义机器人并复制地址。</small></label>
+      <label class="stack-field"><span>每日采集关键词</span><textarea id="collectorKeywords" rows="3">产品经理、AI 产品经理、商业产品经理、策略产品经理</textarea></label>
+      <div class="collector-note"><i>08:00</i><p><strong>自动采集尚需接入后端或招聘 API</strong><br>GitHub Pages 关闭后无法自行运行定时任务；当前可手动导入数据并一键推送简报。</p></div>
+      <div class="career-dialog-actions"><button class="dialog-button ghost" id="testFeishuButton" type="button">发送测试消息</button><span></span><button class="dialog-button ghost" value="cancel">取消</button><button class="dialog-button solid" type="submit">保存设置</button></div>
+    </form>
+  </dialog>
+
+  <dialog class="career-dialog info-dialog" id="collectorDialog">
+    <form method="dialog">
+      <div class="career-dialog-heading"><div><span>COLLECTOR STATUS</span><h2>每日岗位采集规则</h2></div><button class="dialog-close" value="cancel" aria-label="关闭">×</button></div>
+      <ol class="collector-steps">
+        <li><b>08:00</b><span>搜索过去 24 小时发布或更新的产品类校招岗位</span></li>
+        <li><b>DEDUPE</b><span>按公司、岗位、城市、招聘批次四个维度去重</span></li>
+        <li><b>VERIFY</b><span>保留官网链接、发布时间、截止时间与信息来源；不确定项标记待核验</span></li>
+        <li><b>FEISHU</b><span>推送今日新增、截止预警与当日优先投递建议</span></li>
+      </ol>
+      <p class="info-footnote">当前前端已完成数据结构、去重、简报生成与飞书发送；需要后续接入可用招聘 API 或云函数，才能在网页关闭时持续采集。</p>
+      <div class="career-dialog-actions"><span></span><button class="dialog-button solid" value="cancel">知道了</button></div>
+    </form>
+  </dialog>
+
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script src="script.js"></script>
+  <script src="workspace.js"></script>
 </body>
 </html>
