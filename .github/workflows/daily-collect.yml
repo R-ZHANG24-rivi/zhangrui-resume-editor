@@ -38,9 +38,15 @@ jobs:
         id: collector
         run: |
           python collector/main.py --output jobs.json
-          COUNT=$(python -c "import json; print(len(json.load(open('jobs.json')).get('jobs', []))))"
-          echo "COUNT=${COUNT}" >> $GITHUB_OUTPUT
-          echo "Collected ${COUNT} jobs"
+          python - <<'PY' >> $GITHUB_OUTPUT
+          import json
+          try:
+              n = len(json.load(open('jobs.json')).get('jobs', []))
+          except Exception:
+              n = 0
+          print(f"COUNT={n}")
+          PY
+          echo "Collected $(grep COUNT= $GITHUB_OUTPUT | cut -d= -f2) jobs"
 
       - name: Commit & push if changed
         run: |

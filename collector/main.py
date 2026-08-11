@@ -96,17 +96,17 @@ def run_collector(sources_filter=None, output_path=None, city=None):
         try:
             prev = json.loads(Path(output_path).read_text(encoding="utf-8"))
             prev_jobs = prev.get("jobs", []) if isinstance(prev, dict) else []
-            prev_seen = {
-                "|".join((j.get("company", "") + j.get("title", "") + j.get("city", "") + j.get("batch", "")).lower().replace(" ", ""))
-                for j in prev_jobs
-            }
-            merged = list(deduped)
+            base = len(deduped)
             for j in prev_jobs:
-                k = "|".join((j.get("company", "") + j.get("title", "") + j.get("city", "") + j.get("batch", "")).lower().replace(" ", ""))
-                if k not in prev_seen:
-                    merged.append(j)
-            deduped = merged
-            print(f"[INFO] 合并历史数据后共 {len(deduped)} 个岗位 (新增 {len(deduped) - len(prev_jobs) + len(prev_jobs) - len(set(prev_seen))})", file=sys.stderr)
+                k = "|".join(
+                    (j.get("company", "") + j.get("title", "") + j.get("city", "") + j.get("batch", ""))
+                    .lower().replace(" ", "")
+                )
+                if k not in seen:
+                    seen.add(k)
+                    deduped.append(j)
+            added = len(deduped) - base
+            print(f"[INFO] 合并历史数据: 历史 {len(prev_jobs)} 条，本次并入 {added} 条，合计 {len(deduped)} 条", file=sys.stderr)
         except Exception as exc:
             print(f"[WARN] 合并历史数据失败: {exc}", file=sys.stderr)
 
