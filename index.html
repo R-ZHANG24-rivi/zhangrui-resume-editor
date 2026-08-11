@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="张睿的可编辑 A4 简历：直接修改内容、增删模块并导出 PDF。">
+  <title>张睿｜简历编辑器</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="app-bar">
+    <div class="brand">
+      <span class="brand-mark">R</span>
+      <div>
+        <strong>张睿的简历工坊</strong>
+        <span>直接编辑 · A4 排版 · 本地保存</span>
+      </div>
+    </div>
+
+    <div class="toolbar" aria-label="简历编辑工具">
+      <span class="page-status" id="pageStatus"><i></i>A4 单页</span>
+      <button class="tool-button" id="editToggle" type="button">完成编辑</button>
+      <button class="tool-button" id="addSectionButton" type="button">＋ 添加模块</button>
+      <button class="tool-button" id="saveButton" type="button">保存</button>
+      <button class="tool-button quiet" id="resetButton" type="button">恢复默认</button>
+      <button class="tool-button primary" id="exportButton" type="button">导出 PDF</button>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <div class="workspace-note">
+      <strong id="saveState">修改会自动保存在本机</strong>
+      <span>点击文字即可修改；悬停模块可移动或删除；点击照片可替换。</span>
+    </div>
+
+    <div class="paper-frame">
+      <article class="resume-page" id="resumePage" aria-label="A4 简历编辑区">
+        <div class="resume-grid">
+          <div class="resume-column resume-column-left" data-column="left">
+            <header class="identity">
+              <button class="photo-editor" id="photoButton" type="button" aria-label="更换证件照">
+                <img id="profilePhoto" src="profile.png" alt="张睿证件照">
+                <span>更换照片</span>
+              </button>
+              <input id="photoInput" type="file" accept="image/*" hidden>
+
+              <div class="identity-copy">
+                <h1 class="editable" contenteditable="true">张睿</h1>
+                <p class="contact editable" contenteditable="true">期望城市：北京<br>13067018267<br>1277929459@qq.com</p>
+                <p class="target-role editable" contenteditable="true">AI 产品体验设计师｜UI/UX 设计师<br><span>AIGC 交互设计师</span></p>
+              </div>
+            </header>
+
+            <section class="resume-section" data-module-id="education">
+              <h2 class="section-title editable" contenteditable="true">教育经历</h2>
+              <article class="entry">
+                <div class="entry-heading">
+                  <h3 class="editable" contenteditable="true">清华大学美术学院</h3>
+                  <time class="editable" contenteditable="true">2024.09 - 2027.06</time>
+                </div>
+                <p class="entry-role editable" contenteditable="true">科普信息设计｜硕士（在读）</p>
+                <p class="entry-copy editable" contenteditable="true">GPA 3.9/4.0；研究方向：沉浸式体验、用户体验、人工智能辅助设计、艺术疗愈、多模态交互与互联网产品设计。</p>
+              </article>
+              <article class="entry">
+                <div class="entry-heading">
+                  <h3 class="editable" contenteditable="true">江南大学设计学院</h3>
+                  <time class="editable" contenteditable="true">2019.09 - 2023.06</time>
+                </div>
+                <p class="entry-role editable" contenteditable="true">视觉传达设计｜学士</p>
+                <p class="entry-copy editable" contenteditable="true">主修 UI、信息可视化、数字媒体与品牌设计；优秀毕业设计、一等奖学金、校三好学生。</p>
+              </article>
+            </section>
+
+            <section class="resume-section" data-module-id="internships">
+              <h2 class="section-title editable" contenteditable="true">实习经历</h2>
+              <article class="entry">
+                <div class="entry-heading">
+                  <h3 class="editable" contenteditable="true">腾讯新闻</h3>
+                  <time class="editable" contenteditable="true">2026.04 - 至今</time>
+                </div>
+                <p class="entry-role editable" contenteditable="true">产品体验设计实习生</p>
+                <ul class="entry-list editable" contenteditable="true">
+                  <li>任务中心：负责信息架构、任务流程、积分反馈与移动端视觉升级，协同产品/研发评审、走查及上线；改版后一周日均 PV <strong class="blue">增长约 13%</strong>。</li>
+                  <li>转盘抽奖：完成入口、抽奖、反馈、填址、记录及异常状态等完整链路；近 30 天累计抽奖 <strong class="blue">6,400+ 次</strong>，推动积分净消耗约 <strong class="blue">9.26 万</strong>。</li>
+                  <li>《攀了个岩》：使用 Codex、Claude、WorkBuddy 完成玩法、UI、H5 原型及调试；上线后<strong class="blue">连续 3 周平台前三</strong>，近 14 天人均时长 <strong class="blue">204 秒</strong>、有效使用率 <strong class="blue">77.8%</strong>。</li>
+                </ul>
+              </article>
+
+              <article class="entry">
+                <div class="entry-heading">
+                  <h3 class="editable" contenteditable="true">阿里巴巴 · 通义实验室</h3>
+                  <time class="editable" contenteditable="true">2025.10 - 2026.03</time>
+                </div>
+                <p class="entry-role editable" contenteditable="true">AI 视觉美学实习生</p>
+                <ul class="entry-list editable" contenteditable="true">
+                  <li>参与<strong class="violet">通义万相</strong>文生图/图像编辑模型的数据体系优化，构建 SFT 多维标签并参与约 <strong class="blue">8.3 亿张</strong>训练数据整理。</li>
+                  <li>参与“捏脸”“调色盘”等功能与<strong class="violet">结构化 Prompt</strong>体系设计；完成 <strong class="blue">100+ 组</strong> Agent 样本评测及 2.6 版用户 Prompt 指南。</li>
+                </ul>
+              </article>
+
+              <article class="entry">
+                <div class="entry-heading">
+                  <h3 class="editable" contenteditable="true">字节跳动 · 抖音政务运营中台</h3>
+                  <time class="editable" contenteditable="true">2025.07 - 2025.09</time>
+                </div>
+                <p class="entry-role editable" contenteditable="true">视觉设计实习生</p>
+                <ul class="entry-list editable" contenteditable="true">
+                  <li>负责政务与文旅活动视觉系统、主视觉 KV、移动端 UI 与 H5 信息层级优化，建立统一视觉规范。</li>
+                  <li>使用 Midjourney、Stable Diffusion、即梦进行创意生成与视觉扩展，协同运营迭代，推动 <strong class="blue">10+ 个</strong>活动页面上线。</li>
+                </ul>
+              </article>
+            </section>
+
+            <section class="resume-section compact-section" data-module-id="skills">
+              <h2 class="section-title editable" contenteditable="true">专业能力</h2>
+              <ul class="entry-list skill-list editable" contenteditable="true">
+                <li><b>产品体验：</b>用户研究、需求拆解、信息架构、交互流程、移动端 UI、可用性分析、设计走查</li>
+                <li><b>AI 与原型：</b>Prompt 设计、模型体验评测、生成结果分析、<strong class="violet">AI Coding</strong>、H5 交互原型</li>
+                <li><b>设计工具：</b>Figma、Photoshop、Illustrator、After Effects、Premiere、Blender</li>
+                <li><b>协作落地：</b>产品/研发/测试协同、设计评审、走查验收与数据复盘</li>
+              </ul>
+            </section>
+          </div>
+
+          <div class="resume-column resume-column-right" data-column="right">
+            <section class="resume-section summary-section" data-module-id="summary">
+              <h2 class="section-title editable" contenteditable="true">个人总结</h2>
+              <ul class="entry-list editable" contenteditable="true">
+                <li>具备 <strong class="blue">AI 产品体验、UI/UX</strong> 与视觉设计复合能力，拥有<strong class="blue">腾讯新闻</strong>等 C 端真实业务设计与上线经验，覆盖用户研究、信息架构、交互流程、高保真与设计走查。</li>
+                <li>参与<strong class="violet">通义万相</strong>文生图、图像编辑模型及 <strong class="violet">Agent</strong> 的数据体系、<strong class="violet">结构化 Prompt</strong>、功能设计与体验评测，能将模型能力转译为可落地体验。</li>
+                <li>高频使用 ChatGPT、Codex、Claude、Gemini、WorkBuddy 进行需求拆解、设计探索、交互原型与 <strong class="violet">AI Coding</strong>；英语 <strong class="blue">CET-6</strong>。</li>
+              </ul>
+            </section>
+
+            <section class="resume-section projects-section" data-module-id="projects">
+              <h2 class="section-title editable" contenteditable="true">项目经历</h2>
+              <article class="entry project-entry">
+                <h3 class="editable" contenteditable="true">北京亦庄模数世界 AIGC 展厅互动设计</h3>
+                <p class="entry-role editable" contenteditable="true">交互设计师</p>
+                <p class="entry-copy editable" contenteditable="true">围绕脑电信号、面部表情等生理数据，设计“用户输入-数据识别-AI 生成-视觉反馈”的多模态沉浸展项，包含《情绪合成器》《递归星辰》《生命律动》。作品长期开放，《情绪合成器》入选 IEEE VR 2025 Gallery，并以<strong class="blue">第一作者</strong>发表论文。</p>
+              </article>
+              <article class="entry project-entry">
+                <h3 class="editable" contenteditable="true">中国电信活动 AIGC 营销设计</h3>
+                <p class="entry-role editable" contenteditable="true">活动策划 / 产品体验设计师</p>
+                <p class="entry-copy editable" contenteditable="true">结合天翼云图 AIGC 能力策划 AI 生成内容、节日 IP、互动抽奖与传播机制；完成蛇年 IP、3D 直播场景、H5 与抽奖链路，推动广博会、元旦、春节等线上活动落地，提升用户参与度与品牌传播效果。</p>
+              </article>
+              <article class="entry project-entry">
+                <h3 class="editable" contenteditable="true">微信“状态”功能优化原型设计</h3>
+                <p class="entry-role editable" contenteditable="true">腾讯 WXG 产品经理训练营 - 功能方向</p>
+                <p class="entry-copy editable" contenteditable="true">围绕低频使用与表达场景单一等问题，完成半结构化访谈、需求分析、功能目标与使用路径重构，提出状态场景拓展与表达增强方案；输出 PRD 与产品原型，形成“研究-分析-设计-验证”闭环。</p>
+              </article>
+              <article class="entry project-entry">
+                <h3 class="editable" contenteditable="true">北京科技馆未来科考站体验设计</h3>
+                <p class="entry-role editable" contenteditable="true">交互设计 / 概念设计</p>
+                <p class="entry-copy editable" contenteditable="true">以 2090 年外太空科考为背景，构建青少年科考站“蒲宫”，结合 AIGC 工具进行概念与视觉探索，将科学知识转化为场景化互动体验；项目作为科普周展项展出，并获<strong class="blue">北京卫视专题报道</strong>。</p>
+              </article>
+            </section>
+
+            <section class="resume-section compact-section" data-module-id="awards">
+              <h2 class="section-title editable" contenteditable="true">获奖与学术</h2>
+              <ul class="entry-list editable" contenteditable="true">
+                <li>清华大学梅贻琦奖学金</li>
+                <li>IEEE VR 2025：<strong class="blue">第一作者</strong>论文发表，作品入选 Gallery 展单元</li>
+                <li>HRI 2025 LBR 赛道：论文收录</li>
+                <li>另获“学院派奖”全国最高奖、KTK 优秀奖、中国好创意二等奖等设计竞赛 <strong class="blue">30+ 项</strong></li>
+              </ul>
+            </section>
+          </div>
+        </div>
+
+        <footer class="resume-footer">
+          <span class="editable" contenteditable="true">张睿｜一页简历母版｜更新至 2026.08</span>
+          <span>1 / 1</span>
+        </footer>
+      </article>
+    </div>
+  </main>
+
+  <dialog class="photo-dialog" id="photoDialog">
+    <form method="dialog" id="photoForm">
+      <div class="dialog-heading">
+        <div>
+          <span>PHOTO CROP</span>
+          <h2>调整证件照</h2>
+        </div>
+        <button class="icon-button" value="cancel" aria-label="关闭照片编辑器">×</button>
+      </div>
+
+      <div class="crop-layout">
+        <div class="crop-stage" id="cropStage" tabindex="0" aria-label="拖动照片调整裁剪位置">
+          <img id="cropImage" alt="待裁剪照片">
+          <div class="crop-grid" aria-hidden="true"></div>
+        </div>
+        <div class="crop-tips">
+          <strong>拖动照片调整构图</strong>
+          <span>裁剪比例与简历中的照片位完全一致。</span>
+        </div>
+      </div>
+
+      <label class="zoom-control" for="photoZoom">
+        <span>缩放</span>
+        <input id="photoZoom" type="range" min="1" max="3" step="0.01" value="1">
+        <output id="zoomValue">100%</output>
+      </label>
+
+      <div class="photo-dialog-actions">
+        <button class="tool-button quiet" id="choosePhotoButton" type="button">选择新照片</button>
+        <button class="tool-button quiet" id="resetCropButton" type="button">重置构图</button>
+        <span></span>
+        <button class="tool-button quiet" value="cancel">取消</button>
+        <button class="tool-button primary" id="applyCropButton" type="button">应用照片</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="module-dialog" id="moduleDialog">
+    <form method="dialog" id="moduleForm">
+      <div class="dialog-heading">
+        <div>
+          <span>NEW MODULE</span>
+          <h2>添加简历模块</h2>
+        </div>
+        <button class="icon-button" value="cancel" aria-label="关闭">×</button>
+      </div>
+      <label>
+        模块标题
+        <input id="moduleTitle" name="moduleTitle" value="新增模块" required>
+      </label>
+      <label>
+        放置栏位
+        <select id="moduleColumn" name="moduleColumn">
+          <option value="left">左栏</option>
+          <option value="right">右栏</option>
+        </select>
+      </label>
+      <p>添加后可直接修改标题和正文，也可通过模块右上角按钮移动或删除。</p>
+      <div class="dialog-actions">
+        <button class="tool-button quiet" value="cancel">取消</button>
+        <button class="tool-button primary" id="confirmAddModule" value="default">添加模块</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
