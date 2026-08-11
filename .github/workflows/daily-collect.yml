@@ -38,19 +38,30 @@ jobs:
         id: collector
         run: |
           python collector/main.py --output jobs.json
-          echo "COUNT=$(python -c 'import json; print(len(json.load(open(\"jobs.json\")).get(\"jobs\",[])))')" >> $GITHUB_OUTPUT
+          COUNT=$(python -c "import json; print(len(json.load(open('jobs.json')).get('jobs', []))))"
+          echo "COUNT=${COUNT}" >> $GITHUB_OUTPUT
+          echo "Collected ${COUNT} jobs"
 
       - name: Commit & push if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
+          COUNT="${{ steps.collector.outputs.COUNT }}"
+
+          # 0 条结果不覆盖历史数据，避免清空岗位库
+          if [ "${COUNT:-0}" -eq 0 ]; then
+            echo "本次采集 0 条，保留历史 jobs.json"
+            git checkout -- jobs.json 2>/dev/null || true
+            exit 0
+          fi
+
           # Check if jobs.json changed
           if git diff --quiet jobs.json; then
             echo "No changes in jobs.json"
           else
             git add jobs.json
-            git commit -m "chore: daily job collection update (${{ steps.collector.outputs.COUNT }} jobs)"
+            git commit -m "chore: daily job collection update (${COUNT} jobs)"
             git push
-            echo "Committed ${{ steps.collector.outputs.COUNT }} jobs"
+            echo "Committed ${COUNT} jobs"
           fi

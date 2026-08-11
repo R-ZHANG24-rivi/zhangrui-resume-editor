@@ -91,6 +91,25 @@ def run_collector(sources_filter=None, output_path=None, city=None):
     if city:
         deduped = [j for j in deduped if is_target_city(j["city"]) or city in j["city"]]
 
+    # 合并已有 jobs.json（保留历史岗位，避免某天抓取失败清空数据）
+    if output_path and Path(output_path).exists():
+        try:
+            prev = json.loads(Path(output_path).read_text(encoding="utf-8"))
+            prev_jobs = prev.get("jobs", []) if isinstance(prev, dict) else []
+            prev_seen = {
+                "|".join((j.get("company", "") + j.get("title", "") + j.get("city", "") + j.get("batch", "")).lower().replace(" ", ""))
+                for j in prev_jobs
+            }
+            merged = list(deduped)
+            for j in prev_jobs:
+                k = "|".join((j.get("company", "") + j.get("title", "") + j.get("city", "") + j.get("batch", "")).lower().replace(" ", ""))
+                if k not in prev_seen:
+                    merged.append(j)
+            deduped = merged
+            print(f"[INFO] 合并历史数据后共 {len(deduped)} 个岗位 (新增 {len(deduped) - len(prev_jobs) + len(prev_jobs) - len(set(prev_seen))})", file=sys.stderr)
+        except Exception as exc:
+            print(f"[WARN] 合并历史数据失败: {exc}", file=sys.stderr)
+
     # 按优先级排序：北京 + 重点公司 + 设计岗 靠前
     deduped.sort(key=priority_score, reverse=True)
 

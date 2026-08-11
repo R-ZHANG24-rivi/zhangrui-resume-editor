@@ -87,17 +87,23 @@ def collect_nowcoder_playwright() -> list[dict]:
         page = context.new_page()
 
         try:
-            page.goto(NOWCODER_JOBS_URL, wait_until="networkidle", timeout=30000)
-            page.wait_for_timeout(2000)
+            page.goto(NOWCODER_JOBS_URL, wait_until="domcontentloaded", timeout=45000)
+            # 等待岗位卡片出现（最多 15s）
+            try:
+                page.wait_for_selector("a[href*='/jobs/detail/']", timeout=15000)
+            except Exception:
+                pass
+            page.wait_for_timeout(2500)
 
             for _ in range(3):
                 page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
-                page.wait_for_timeout(1500)
+                page.wait_for_timeout(1800)
 
             cards = page.query_selector_all(
                 ".job-item, .job-card, .position-item, "
                 "a[href*='/jobs/detail/'], "
-                "[class*='job-card'], [class*='JobCard']"
+                "[class*='job-card'], [class*='JobCard'], "
+                "[class*='job-list'], [class*='recruit'], [class*='post']"
             )
 
             for card in cards:
@@ -211,15 +217,23 @@ def collect_boss_playwright() -> list[dict]:
             try:
                 url = (f"{BOSS_URL}?query={query}"
                        f"&city=101010100&experience=104&page=1")  # 101010100 = 北京
-                page.goto(url, wait_until="networkidle", timeout=30000)
-                page.wait_for_timeout(3000)
+                page.goto(url, wait_until="domcontentloaded", timeout=45000)
+                page.wait_for_timeout(4000)
+
+                # 检测反爬验证页
+                page_text = page.evaluate("document.body ? document.body.innerText : ''")
+                if "安全验证" in page_text or "验证码" in page_text or "访问过于频繁" in page_text:
+                    print(f"  [WARN] Boss 直聘 '{query}' 触发反爬验证，跳过")
+                    continue
 
                 page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
-                page.wait_for_timeout(2000)
+                page.wait_for_timeout(2500)
 
                 cards = page.query_selector_all(
                     ".job-card-wrapper, .job-card-box li, "
-                    "[class*='job-card'], [class*='JobCard']"
+                    "[class*='job-card'], [class*='JobCard'], "
+                    "[class*='job-list'], [class*='recruit'], "
+                    "li[class*='job'], div[class*='job-item']"
                 )
 
                 for card in cards:
