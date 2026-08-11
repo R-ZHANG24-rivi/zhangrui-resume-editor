@@ -214,30 +214,42 @@ def collect_boss_playwright() -> list[dict]:
         page = context.new_page()
 
         for query in BOSS_QUERIES:
-            try:
-                url = (f"{BOSS_URL}?query={query}"
-                       f"&city=101010100&page=1")  # 101010100 = 北京
-                page.goto(url, wait_until="domcontentloaded", timeout=45000)
-                page.wait_for_timeout(5000)
+            cards = []
+            for attempt in range(2):  # 遇到反爬跳转时重试一次
+                try:
+                    url = (f"{BOSS_URL}?query={query}"
+                           f"&city=101010100&page=1")  # 101010100 = 北京
+                    page.goto(url, wait_until="domcontentloaded", timeout=45000)
+                    page.wait_for_timeout(5000)
 
-                # 检测反爬验证页 / 登录拦截
-                page_text = page.evaluate("document.body ? document.body.innerText : ''")
-                if "安全验证" in page_text or "验证码" in page_text or "访问过于频繁" in page_text:
-                    print(f"  [WARN] Boss 直聘 '{query}' 触发反爬验证，跳过")
+                    # 检测反爬验证页 / 登录拦截
+                    page_text = page.evaluate("document.body ? document.body.innerText : ''")
+                    if "安全验证" in page_text or "验证码" in page_text or "访问过于频繁" in page_text:
+                        print(f"  [WARN] Boss 直聘 '{query}' 触发反爬验证，跳过")
+                        break
+                    if "login" in page.url.lower() or "请登录" in page_text or "登录后" in page_text:
+                        print(f"  [WARN] Boss 直聘 '{query}' 需要登录，跳过")
+                        break
+
+                    page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+                    page.wait_for_timeout(2500)
+                    # 二次校验：若等待期间发生跳转（反爬），重新评估
+                    page_text2 = page.evaluate("document.body ? document.body.innerText : ''")
+                    if "安全验证" in page_text2 or "验证码" in page_text2 or "登录后" in page_text2:
+                        if attempt == 0:
+                            print(f"  [RETRY] Boss 直聘 '{query}' 等待期间跳转，重试")
+                            continue
+                        break
+
+                    cards = page.query_selector_all(
+                        ".job-card-wrapper, .job-card-box li, "
+                        "[class*='job-card'], [class*='JobCard'], "
+                        "[class*='job-list'], [class*='recruit'], "
+                        "li[class*='job'], div[class*='job-item']"
+                    )
+                except Exception as exc:
+                    print(f"  [WARN] Boss 直聘 '{query}' 采集失败: {exc}")
                     continue
-                if "login" in page.url.lower() or "请登录" in page_text or "登录后" in page_text:
-                    print(f"  [WARN] Boss 直聘 '{query}' 需要登录，跳过")
-                    continue
-
-                page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
-                page.wait_for_timeout(2500)
-
-                cards = page.query_selector_all(
-                    ".job-card-wrapper, .job-card-box li, "
-                    "[class*='job-card'], [class*='JobCard'], "
-                    "[class*='job-list'], [class*='recruit'], "
-                    "li[class*='job'], div[class*='job-item']"
-                )
 
                 for card in cards:
                     try:
@@ -303,8 +315,7 @@ def collect_boss_playwright() -> list[dict]:
                     except Exception:
                         continue
 
-            except Exception as exc:
-                print(f"  [WARN] Boss 直聘 '{query}' 采集失败: {exc}")
+                break  # 成功采集，跳出重试循环
 
         browser.close()
 
