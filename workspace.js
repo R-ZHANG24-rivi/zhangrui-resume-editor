@@ -276,7 +276,7 @@ function renderTable() {
       <td>${escapeHTML(job.batch || '—')}</td>
       <td>${formatDate(job.publishedAt)}</td>
       <td>${countdownLabel(job)}</td>
-      <td>${escapeHTML(job.source || '—')}</td>
+      <td>${escapeHTML(job.source || '—')}${job.priorityKind ? ` · <span class="priority-tag ${escapeHTML(job.priorityKind)}">${escapeHTML(job.priorityKind)}</span>` : ''}</td>
       <td><select class="status-select" data-status-job="${job.id}">${JOB_STATUSES.map((status) => `<option ${job.status === status ? 'selected' : ''}>${status}</option>`).join('')}</select></td>
       <td><div class="row-buttons"><button class="row-edit" data-resume-job="${job.id}" type="button" title="去定制这份岗位的简历">R</button><button class="row-edit" data-edit-job="${job.id}" type="button" title="编辑岗位">···</button></div></td>
     </tr>`;

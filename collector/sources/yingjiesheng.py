@@ -6,9 +6,28 @@ URL: https://www.yingjiesheng.com/commend-fulltime-1.html
 """
 
 import re
+import sys
 import requests
 from datetime import datetime, timezone
 from bs4 import BeautifulSoup
+
+try:
+    from ..config import (
+        company_priority,
+        is_priority_company,
+        matches_role,
+        is_target_city,
+    )
+except ImportError:
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+    from config import (
+        company_priority,
+        is_priority_company,
+        matches_role,
+        is_target_city,
+    )
 
 BASE_URL = "https://www.yingjiesheng.com"
 HEADERS = {
@@ -81,9 +100,7 @@ def collect_yingjiesheng() -> list[dict]:
                     continue
 
                 # 检查是否与校招/产品/设计相关
-                relevant_keywords = ["产品", "设计", "运营", "校招", "管培", "应届",
-                                     "AI", "交互", "体验", "UI", "UX", "数据分析"]
-                if not any(kw in raw_title for kw in relevant_keywords):
+                if not matches_role(raw_title):
                     continue
 
                 city, title = extract_city_and_title(raw_title)
@@ -99,24 +116,31 @@ def collect_yingjiesheng() -> list[dict]:
                         company = parts[0].strip()
                         title = parts[1].strip()
 
+                # 非北京岗位跳过（聚焦 base 北京）
+                if city and not is_target_city(city):
+                    continue
+
                 url_full = href if href.startswith("http") else f"{BASE_URL}{href}"
                 dedupe = f"{company}|{title}"
                 if dedupe in seen:
                     continue
                 seen.add(dedupe)
 
-                jobs.append({
+                job = {
                     "id": f"yjs-{hash(url_full) & 0x7FFFFFFF:08x}",
                     "company": company,
                     "title": title[:80],
-                    "city": city,
+                    "city": city or "北京",
                     "batch": "2027 秋招" if "实习" not in title else "2027 实习",
                     "url": url_full,
                     "publishedAt": datetime.now(timezone.utc).isoformat(),
                     "deadline": "",
                     "source": "应届生求职网",
                     "verification": "待核验",
-                })
+                }
+                job["target"] = is_priority_company(company)
+                job["priorityKind"] = company_priority(company) or ""
+                jobs.append(job)
 
         except requests.RequestException as exc:
             print(f"  [WARN] 应届生求职网第 {page} 页请求失败: {exc}")

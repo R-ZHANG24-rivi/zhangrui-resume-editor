@@ -2,22 +2,51 @@
 Playwright 浏览器自动化采集器
 ------------------------------
 用于采集需要浏览器渲染的招聘网站 (牛客网、Boss 直聘等)
+聚焦：北京 base + 交互/视觉/AIGC/产品设计岗位 + 重点公司
+
 支持 GitHub Actions 环境运行
 """
 
 from datetime import datetime, timezone
+
+try:
+    from ..config import (
+        company_priority,
+        is_priority_company,
+        matches_role,
+        is_target_city,
+    )
+except ImportError:
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+    from config import (
+        company_priority,
+        is_priority_company,
+        matches_role,
+        is_target_city,
+    )
 
 # 牛客网校招职位页
 NOWCODER_JOBS_URL = "https://www.nowcoder.com/jobs/school/jobs"
 # Boss 直聘校招搜索
 BOSS_URL = "https://www.zhipin.com/web/geek/job"
 
+# 城市全量表（用于从文本中识别城市）
 CITIES = ["北京", "上海", "广州", "深圳", "杭州", "成都", "武汉", "南京",
           "西安", "苏州", "重庆", "长沙", "天津", "郑州", "合肥", "厦门",
           "青岛", "济南", "大连", "福州", "石家庄", "东莞"]
 
-RELEVANT_KEYWORDS = ["产品", "设计", "交互", "体验", "UI", "UX", "AI",
-                     "运营", "管培", "数据", "Agent", "agent", "用户"]
+# Boss 直聘搜索词：围绕北京 + 设计/产品方向
+BOSS_QUERIES = [
+    "交互设计师 北京",
+    "视觉设计师 北京",
+    "AIGC设计师 北京",
+    "UI设计师 北京",
+    "用户体验设计师 北京",
+    "产品经理 北京",
+    "AI产品经理 北京",
+]
 
 
 def _has_playwright():
@@ -28,8 +57,16 @@ def _has_playwright():
         return False
 
 
+def _extract_city(text: str) -> str:
+    """从文本中识别城市"""
+    for c in CITIES:
+        if c in text:
+            return c
+    return ""
+
+
 def collect_nowcoder_playwright() -> list[dict]:
-    """用 Playwright 采集牛客网校招职位"""
+    """用 Playwright 采集牛客网校招职位（北京 + 设计/产品方向）"""
     if not _has_playwright():
         print("  [SKIP] Playwright 未安装")
         return []
@@ -53,13 +90,10 @@ def collect_nowcoder_playwright() -> list[dict]:
             page.goto(NOWCODER_JOBS_URL, wait_until="networkidle", timeout=30000)
             page.wait_for_timeout(2000)
 
-            # 滚动以触发懒加载
             for _ in range(3):
                 page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
                 page.wait_for_timeout(1500)
 
-            # 提取岗位卡片
-            # 牛客网岗位卡片使用特定结构
             cards = page.query_selector_all(
                 ".job-item, .job-card, .position-item, "
                 "a[href*='/jobs/detail/'], "
@@ -68,7 +102,6 @@ def collect_nowcoder_playwright() -> list[dict]:
 
             for card in cards:
                 try:
-                    # 提取链接
                     link = card.query_selector("a[href*='/jobs/detail/']")
                     if not link:
                         href_attr = card.get_attribute("href")
@@ -82,7 +115,6 @@ def collect_nowcoder_playwright() -> list[dict]:
                     if not href or "/jobs/detail/" not in href:
                         continue
 
-                    # 从 URL 提取 job ID
                     import re
                     id_match = re.search(r'/jobs/detail/(\d+)', href)
                     if not id_match:
@@ -93,48 +125,44 @@ def collect_nowcoder_playwright() -> list[dict]:
                         continue
                     seen.add(job_id)
 
-                    # 提取岗位标题
                     title_el = card.query_selector(
                         ".job-name, .job-title, .position-name, "
                         "span.title, h3, h4"
                     )
                     title = title_el.inner_text().strip() if title_el else ""
 
-                    if not title or not any(kw in title for kw in RELEVANT_KEYWORDS):
+                    if not title or not matches_role(title):
                         continue
 
-                    # 提取公司名
                     company_el = card.query_selector(
                         ".company-name, .corp-name, .enterprise-name, "
                         "a[href*='/enterprise/']"
                     )
                     company = company_el.inner_text().strip() if company_el else ""
 
-                    # 提取城市
                     city = ""
                     city_el = card.query_selector(
                         ".job-area, .location, .city, .work-place"
                     )
                     if city_el:
-                        city_text = city_el.inner_text().strip()
-                        for c in CITIES:
-                            if c in city_text:
-                                city = c
-                                break
+                        city = _extract_city(city_el.inner_text().strip())
 
-                    # 提取薪资
                     salary = ""
                     salary_el = card.query_selector(".salary, .salary-text")
                     if salary_el:
                         salary = salary_el.inner_text().strip()
 
+                    # 非北京岗位跳过（聚焦 base 北京）
+                    if city and not is_target_city(city):
+                        continue
+
                     url_full = f"https://www.nowcoder.com{href}" if href.startswith("/") else href
 
-                    jobs.append({
+                    job = {
                         "id": f"nc-pw-{job_id}",
                         "company": company,
                         "title": f"{title} ({salary})" if salary else title,
-                        "city": city,
+                        "city": city or "北京",
                         "batch": "2027 秋招",
                         "url": url_full,
                         "publishedAt": datetime.now(timezone.utc).isoformat(),
@@ -142,7 +170,10 @@ def collect_nowcoder_playwright() -> list[dict]:
                         "source": "牛客网·校招职位",
                         "verification": "待核验",
                         "notes": f"薪资: {salary}" if salary else "",
-                    })
+                    }
+                    job["target"] = is_priority_company(company)
+                    job["priorityKind"] = company_priority(company) or ""
+                    jobs.append(job)
 
                 except Exception:
                     continue
@@ -156,7 +187,7 @@ def collect_nowcoder_playwright() -> list[dict]:
 
 
 def collect_boss_playwright() -> list[dict]:
-    """用 Playwright 采集 Boss 直聘校招岗位"""
+    """用 Playwright 采集 Boss 直聘校招岗位（北京 + 设计/产品方向）"""
     if not _has_playwright():
         print("  [SKIP] Playwright 未安装")
         return []
@@ -165,14 +196,6 @@ def collect_boss_playwright() -> list[dict]:
 
     jobs = []
     seen = set()
-
-    queries = [
-        "产品经理 校招",
-        "AI产品经理",
-        "交互设计 校招",
-        "UI设计 校招",
-        "用户体验 校招",
-    ]
 
     with sync_playwright() as pw:
         browser = pw.chromium.launch(headless=True)
@@ -184,14 +207,13 @@ def collect_boss_playwright() -> list[dict]:
         )
         page = context.new_page()
 
-        for query in queries:
+        for query in BOSS_QUERIES:
             try:
                 url = (f"{BOSS_URL}?query={query}"
-                       f"&city=100010000&experience=104&page=1")
+                       f"&city=101010100&experience=104&page=1")  # 101010100 = 北京
                 page.goto(url, wait_until="networkidle", timeout=30000)
                 page.wait_for_timeout(3000)
 
-                # 滚动加载更多
                 page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
                 page.wait_for_timeout(2000)
 
@@ -224,15 +246,16 @@ def collect_boss_playwright() -> list[dict]:
                         area = area_el.inner_text().strip() if area_el else ""
                         salary = salary_el.inner_text().strip() if salary_el else ""
 
-                        if not any(kw in title for kw in RELEVANT_KEYWORDS):
+                        if not matches_role(title):
                             continue
 
                         city = area.split("·")[0] if area else ""
                         if not city:
-                            for c in CITIES:
-                                if c in area:
-                                    city = c
-                                    break
+                            city = _extract_city(area)
+
+                        # 非北京跳过
+                        if city and not is_target_city(city):
+                            continue
 
                         href = link_el.get_attribute("href") if link_el else ""
                         if href and not href.startswith("http"):
@@ -243,11 +266,11 @@ def collect_boss_playwright() -> list[dict]:
                             continue
                         seen.add(dedupe)
 
-                        jobs.append({
+                        job = {
                             "id": f"boss-pw-{hash(dedupe) & 0x7FFFFFFF:08x}",
                             "company": company,
                             "title": f"{title} ({salary})" if salary else title,
-                            "city": city,
+                            "city": city or "北京",
                             "batch": "2027 秋招" if "实习" not in title else "2027 实习",
                             "url": href,
                             "publishedAt": datetime.now(timezone.utc).isoformat(),
@@ -255,7 +278,10 @@ def collect_boss_playwright() -> list[dict]:
                             "source": "Boss 直聘",
                             "verification": "待核验",
                             "notes": f"薪资: {salary}" if salary else "",
-                        })
+                        }
+                        job["target"] = is_priority_company(company)
+                        job["priorityKind"] = company_priority(company) or ""
+                        jobs.append(job)
 
                     except Exception:
                         continue

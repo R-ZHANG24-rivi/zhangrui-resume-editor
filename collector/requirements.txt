@@ -1,6 +1,6 @@
 requests>=2.28
 beautifulsoup4>=4.12
 lxml>=4.9
+playwright>=1.40
 
-# Boss 直聘需要 Playwright (可选，未安装时自动跳过)
-# playwright>=1.40
+# Boss 直聘 / 牛客网需要 Playwright (未安装时采集器自动跳过)

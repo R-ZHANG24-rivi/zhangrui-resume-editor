@@ -6,8 +6,26 @@
 """
 
 import re
+import sys
 import requests
 from datetime import datetime, timezone
+
+# 兼容两种运行方式: python collector/main.py 与 python -m collector.main
+try:
+    from ..config import (
+        company_priority,
+        is_priority_company,
+        matches_role,
+        is_target_city,
+    )
+except ImportError:
+    sys.path.insert(0, str(__import__("pathlib").Path(__file__).resolve().parent.parent))
+    from config import (
+        company_priority,
+        is_priority_company,
+        matches_role,
+        is_target_city,
+    )
 
 BASE_URL = "https://www.nowcoder.com"
 HEADERS = {
@@ -90,9 +108,7 @@ def extract_jobs_from_html(html: str) -> list[dict]:
             continue
 
         # 跳过不相关的岗位 (只看产品、设计、AI类)
-        relevant = ["产品", "设计", "交互", "体验", "UI", "UX", "AI",
-                    "运营", "管培", "数据", "Agent", "agent"]
-        if not any(kw in title for kw in relevant):
+        if not matches_role(title):
             continue
 
         # 提取公司名 (链接后面的公司信息区域)
@@ -108,6 +124,10 @@ def extract_jobs_from_html(html: str) -> list[dict]:
                 city = c
                 break
 
+        # 非北京岗位跳过（聚焦 base 北京）
+        if city and not is_target_city(city):
+            continue
+
         # 提取薪资
         salary_match = re.search(r'(\d+-\d+K[^<]*)', title)
         salary = salary_match.group(1) if salary_match else ""
@@ -119,11 +139,11 @@ def extract_jobs_from_html(html: str) -> list[dict]:
         elif "2026" in title or "26届" in title:
             batch = "2026 春招"
 
-        jobs.append({
+        job = {
             "id": f"nc-job-{job_id}",
             "company": company,
             "title": title[:100],
-            "city": city,
+            "city": city or "北京",
             "batch": batch,
             "url": url,
             "publishedAt": datetime.now(timezone.utc).isoformat(),
@@ -131,7 +151,10 @@ def extract_jobs_from_html(html: str) -> list[dict]:
             "source": "牛客网·校招职位",
             "verification": "待核验",
             "notes": f"薪资: {salary}" if salary else "",
-        })
+        }
+        job["target"] = is_priority_company(company)
+        job["priorityKind"] = company_priority(company) or ""
+        jobs.append(job)
 
     return jobs
 

@@ -754,6 +754,10 @@ body {
 .job-company span { display: block; margin-top: 3px; color: #737b7f; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .verification { display: inline-block; margin-top: 4px; color: #6d762f; font-size: 7px; }
 .verification.pending { color: #b25a36; }
+.priority-tag { display: inline-block; margin-left: 5px; padding: 1px 5px; border-radius: 4px; font-size: 7px; font-weight: 700; vertical-align: middle; color: white; }
+.priority-tag.互联网大厂 { background: #2f6df0; }
+.priority-tag.AI公司 { background: #7b3fe4; }
+.priority-tag.外企 { background: #0f9d6b; }
 .target-toggle { width: 26px; height: 26px; border: 0; color: #b6b7b3; background: transparent; font-size: 16px; }
 .target-toggle.is-target { color: #e3a925; }
 .status-select { max-width: 100%; height: 28px; padding: 0 4px; border: 1px solid #d9d7d1; color: #4c5458; background: white; font-size: 8px; }

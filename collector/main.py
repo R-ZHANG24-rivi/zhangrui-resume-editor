@@ -18,6 +18,7 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
+from config import priority_score, is_target_city
 from sources.nowcoder import collect_nowcoder
 from sources.yingjiesheng import collect_yingjiesheng
 from sources.boss import collect_boss
@@ -45,12 +46,13 @@ def normalize_job(raw: dict) -> dict:
         "verification": raw.get("verification") or "待核验",
         "status": "待投递",
         "notes": (raw.get("notes") or "").strip(),
-        "target": False,
+        "target": bool(raw.get("target", False)),
+        "priorityKind": raw.get("priorityKind") or "",
         "createdAt": raw.get("createdAt") or datetime.now(timezone.utc).isoformat(),
     }
 
 
-def run_collector(sources_filter=None, output_path=None):
+def run_collector(sources_filter=None, output_path=None, city=None):
     """运行采集流程，返回合并后的岗位列表"""
     all_jobs = []
     selected = sources_filter or list(SOURCES.keys())
@@ -85,10 +87,18 @@ def run_collector(sources_filter=None, output_path=None):
             seen.add(key)
             deduped.append(job)
 
+    # 按城市过滤（如需）
+    if city:
+        deduped = [j for j in deduped if is_target_city(j["city"]) or city in j["city"]]
+
+    # 按优先级排序：北京 + 重点公司 + 设计岗 靠前
+    deduped.sort(key=priority_score, reverse=True)
+
     print(f"[INFO] 去重后共 {len(deduped)} 个岗位", file=sys.stderr)
 
     result = {
         "exportedAt": datetime.now(timezone.utc).isoformat(),
+        "focus": "北京 · 交互/视觉/AIGC/产品设计 · 互联网大厂/AI公司/外企",
         "jobs": deduped,
     }
 
@@ -108,8 +118,9 @@ def main():
     parser.add_argument("--source", "-s", choices=list(SOURCES.keys()), action="append",
                         help="指定采集源 (可多次使用，不指定则采集全部)")
     parser.add_argument("--output", "-o", help="输出 JSON 文件路径 (默认输出到 stdout)")
+    parser.add_argument("--city", "-c", help="按城市过滤 (例如: 北京)")
     args = parser.parse_args()
-    run_collector(sources_filter=args.source, output_path=args.output)
+    run_collector(sources_filter=args.source, output_path=args.output, city=args.city)
 
 
 if __name__ == "__main__":
