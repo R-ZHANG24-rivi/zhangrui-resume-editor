@@ -1,5 +1,5 @@
 {
-  "exportedAt": "2026-08-12T01:20:01.433042+00:00",
+  "exportedAt": "2026-08-13T01:22:17.577479+00:00",
   "focus": "北京 · 交互/视觉/AIGC/产品设计 · 互联网大厂/AI公司/外企",
   "jobs": [
     {
@@ -65,6 +65,23 @@
       "notes": "外企设计岗",
       "target": true,
       "priorityKind": "外企"
+    },
+    {
+      "id": "nc-pw-456907",
+      "company": "小米\n企业服务\n暂无\n校招高薪榜\n环境不错",
+      "title": "产品经理",
+      "city": "北京",
+      "batch": "2027 秋招",
+      "url": "https://www.nowcoder.com/jobs/detail/456907?deliverSource=1&pageSource=5001&channel=npJobTab&logid=52b277c2328a27d8c6cbc65932e1dc6c",
+      "publishedAt": "2026-08-13T01:20:15.948809+00:00",
+      "deadline": "",
+      "source": "牛客网·校招职位",
+      "verification": "待核验",
+      "status": "待投递",
+      "notes": "",
+      "target": true,
+      "priorityKind": "互联网大厂",
+      "createdAt": "2026-08-13T01:20:16.337252+00:00"
     },
     {
       "id": "init-004",
