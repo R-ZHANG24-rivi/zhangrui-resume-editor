@@ -2,3 +2,7 @@ tmp/
 output/
 .DS_Store
 
+# portfolio (prism) build & deps
+prism-portfolio/node_modules/
+prism-portfolio/dist/
+

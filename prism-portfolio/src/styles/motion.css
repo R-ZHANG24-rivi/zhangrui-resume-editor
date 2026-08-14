@@ -1,0 +1,239 @@
+/* ==========================================================================
+   PRISM — MOTION LAYER
+
+   Scroll-linked depth and text reveals.
+
+   Reference language being adopted (not copied): inertial scroll, elements
+   travelling at different speeds, oversized section titles used as breathing
+   space, and text that lights up word by word instead of fading in.
+
+   Everything here degrades to static under `prefers-reduced-motion`.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   SCROLL FEEL
+
+   Note on smooth scrolling: a "fake scroll" wrapper (translating the content and
+   faking document height) was tried and removed. It breaks every `position:
+   fixed` descendant — the nav, the canvas, the project back button — and makes
+   scroll offsets ambiguous for anchors and IntersectionObserver.
+
+   The premium feel is instead built from what actually reads on screen:
+   parallax depth, masked word reveals, and long eased transitions. Native
+   scrolling stays untouched, so nothing is fighting the platform.
+   -------------------------------------------------------------------------- */
+
+html {
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+/* --------------------------------------------------------------------------
+   SPLIT TEXT — word-by-word reveal
+
+   Each word rises out of a mask. The mask is what separates this from a fade:
+   the word arrives from somewhere rather than materialising in place.
+   -------------------------------------------------------------------------- */
+
+.split-text {
+  /* prevents the mask from clipping descenders (g, y, p) */
+  --split-pad: 0.14em;
+}
+
+.split-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: var(--split-pad);
+  margin-bottom: calc(var(--split-pad) * -1);
+}
+
+.split-inner {
+  display: inline-block;
+  transform: translate3d(0, 105%, 0);
+  opacity: 0;
+  transition:
+    transform 1.05s var(--ease-optic),
+    opacity 0.85s var(--ease-optic);
+}
+
+.split-text.is-lit .split-inner {
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+}
+
+/* Dimmed variant: unlit words sit in grey and resolve to full white, echoing
+   the reference's "sentence lighting up as you read it" effect. */
+.split-text.is-dim .split-inner {
+  color: var(--ink-dim);
+  transition:
+    transform 1.05s var(--ease-optic),
+    opacity 0.85s var(--ease-optic),
+    color 1.2s var(--ease-optic);
+}
+.split-text.is-dim.is-lit .split-inner {
+  color: var(--ink);
+}
+
+/* --------------------------------------------------------------------------
+   OVERSIZED SECTION TITLE
+
+   The reference uses full-bleed type as a rhythm device — a beat of pure scale
+   between content blocks. Here it doubles as the section marker, so the page
+   gets that punctuation without adding any new UI.
+   -------------------------------------------------------------------------- */
+
+.mega-title {
+  display: block;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  /* large enough to dominate, restrained enough to leave the right-hand third
+     of the frame free for the crystal */
+  font-size: clamp(3rem, 13.5vw, 15rem);
+  line-height: 0.86;
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--ink);
+  margin: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* hairline variant — outlined type reads as structure, not shouting */
+.mega-title.is-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--ink-ghost);
+}
+
+/* the wavelength washes through the type on project sections */
+.mega-title.is-spectral {
+  background: linear-gradient(
+    92deg,
+    var(--ink) 0%,
+    var(--ink) 38%,
+    var(--spectrum-primary) 62%,
+    var(--spectrum-secondary) 88%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.mega-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 2vh 0;
+}
+
+/* --------------------------------------------------------------------------
+   MEDIA THAT RISES THROUGH THE TYPE
+
+   The strongest move in the reference: project imagery emerges from behind the
+   oversized title and overlaps it, while its colour bleeds into the surrounding
+   space. Mapped onto the wavelength system, the "bleed" becomes the project's
+   own light.
+   -------------------------------------------------------------------------- */
+
+.media-riser {
+  position: relative;
+  z-index: 2;
+  margin-inline: auto;
+  border-radius: 3px;
+  overflow: hidden;
+  /* the ambient spill — this is what makes it feel lit rather than pasted */
+  box-shadow:
+    0 0 0 1px var(--glass-edge),
+    0 30px 120px -20px var(--spectrum-glow);
+}
+
+.media-riser::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 55%,
+    color-mix(in srgb, var(--void) 82%, transparent) 100%
+  );
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   REVEAL PRIMITIVES
+   -------------------------------------------------------------------------- */
+
+.rise {
+  opacity: 0;
+  transform: translate3d(0, 26px, 0);
+  transition:
+    opacity 0.95s var(--ease-optic),
+    transform 1.15s var(--ease-optic);
+}
+.rise.is-shown { opacity: 1; transform: none; }
+
+/* hairline that draws itself in — used to separate editorial blocks */
+.rule-draw {
+  height: 1px;
+  background: var(--ink-trace);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 1.4s var(--ease-optic);
+}
+.rule-draw.is-shown { transform: scaleX(1); }
+
+/* --------------------------------------------------------------------------
+   REDUCED MOTION — everything resolves to its final state
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .split-inner {
+    transform: none !important;
+    opacity: 1 !important;
+    transition: none !important;
+    color: var(--ink) !important;
+  }
+  .rise { opacity: 1 !important; transform: none !important; transition: none; }
+  .rule-draw { transform: scaleX(1) !important; transition: none; }
+  .media-riser { box-shadow: 0 0 0 1px var(--glass-edge); }
+}
+
+/* --------------------------------------------------------------------------
+   PARALLAX WRAPPERS
+
+   useParallax owns the wrapper's transform so the child keeps its own transform
+   free for hover lifts and reveals — otherwise the two fight over the same
+   property.
+
+   `.project-grid` defines its own column count (2 up, 1 on narrow), so the
+   wrapper must simply occupy one cell rather than declare a span of its own.
+   -------------------------------------------------------------------------- */
+
+.project-grid .card-drift {
+  display: flex;
+  will-change: transform;
+}
+
+/* the card fills its drift wrapper */
+.card-drift > .project-card {
+  width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   ABOUT — statement typography
+   -------------------------------------------------------------------------- */
+
+.about-claim {
+  font-family: var(--font-serif);
+  line-height: var(--lead-snug);
+  letter-spacing: var(--track-tight);
+  margin-bottom: 1.1em;
+}
+
+.about-elaboration {
+  max-width: 30ch;
+}

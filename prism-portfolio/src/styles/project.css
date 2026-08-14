@@ -1,0 +1,283 @@
+/* ==========================================================================
+   PRISM — PROJECT VIEW
+
+   A single wavelength inside the same black universe.
+
+   Design rule from the brief: six projects must not read as six different
+   websites. So this file introduces NO new layout language and NO hardcoded
+   colour — it reuses the index grid, glass and type scale, and takes its hue
+   entirely from the `--spectrum-*` custom properties that `applyLight()` sets.
+   Changing project therefore changes light, never structure.
+   ========================================================================== */
+
+.project-view {
+  position: relative;
+  z-index: var(--z-content);
+  /* extra top room so the fixed back button never collides with hero meta */
+  padding-top: calc(var(--nav-h) + 12vh);
+  padding-bottom: 12vh;
+  animation: project-enter var(--dur-base) var(--ease-optic) both;
+}
+
+@keyframes project-enter {
+  from { opacity: 0; transform: translate3d(0, 14px, 0); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* --------------------------------------------------------------------------
+   BACK TO INDEX
+   -------------------------------------------------------------------------- */
+
+/* Sits in the top-left of the content column, aligned to the page gutter.
+   Fixed rather than scrolling away: returning to the index must always be one
+   click, however deep the reader has scrolled. */
+.project-back {
+  position: fixed;
+  top: calc(var(--nav-h) + 3.2vh);
+  left: var(--gutter);
+  z-index: calc(var(--z-nav) + 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7em;
+  padding: 0.7em 1.15em;
+  color: var(--ink-mute);
+  letter-spacing: var(--track-wide);
+  background: var(--glass-fill);
+  border: 1px solid var(--glass-edge);
+  border-radius: 2px;
+  backdrop-filter: blur(var(--glass-blur));
+  cursor: pointer;
+  transition:
+    color var(--dur-tap) var(--ease-glass),
+    border-color var(--dur-tap) var(--ease-glass),
+    background var(--dur-tap) var(--ease-glass);
+}
+
+.project-back:hover {
+  color: var(--ink-strong);
+  border-color: var(--glass-edge-lit);
+  background: var(--glass-fill-2);
+}
+
+.project-back .back-arrow {
+  transition: transform var(--dur-tap) var(--ease-glass);
+}
+.project-back:hover .back-arrow {
+  transform: translateX(-3px);
+}
+
+/* --------------------------------------------------------------------------
+   HERO
+   -------------------------------------------------------------------------- */
+
+.project-hero {
+  padding-bottom: 8vh;
+}
+
+.project-hero-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 1.4em;
+  margin-bottom: 2.2vh;
+}
+
+.project-index {
+  color: var(--ink-dim);
+}
+
+/* the one place the wavelength speaks directly */
+.project-wavelength {
+  color: var(--spectrum-primary);
+  letter-spacing: var(--track-wide);
+}
+
+.project-title {
+  font-family: var(--font-serif);
+  line-height: var(--lead-tight);
+  letter-spacing: var(--track-display);
+  max-width: 16ch;
+}
+
+/* wavelength rendered as a physical band of light */
+.project-spectrum-band {
+  position: relative;
+  height: 1px;
+  margin: 5vh 0 4vh;
+  background: var(--ink-trace);
+  overflow: visible;
+}
+
+.project-spectrum-band .band-fill {
+  position: absolute;
+  inset: 0;
+  transform-origin: left center;
+  animation: band-sweep var(--dur-epic) var(--ease-optic) both;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--spectrum-primary),
+    var(--spectrum-secondary),
+    transparent
+  );
+  /* the glow is what makes it read as emitted light, not a coloured rule */
+  box-shadow: 0 0 18px 1px var(--spectrum-glow);
+}
+
+@keyframes band-sweep {
+  from { transform: scaleX(0); opacity: 0; }
+  to   { transform: scaleX(1); opacity: 1; }
+}
+
+/* facts row */
+.project-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--grid-gap);
+  max-width: 780px;
+  margin: 0;
+}
+
+.project-facts .fact dt {
+  letter-spacing: var(--track-wide);
+  margin-bottom: 0.55em;
+}
+.project-facts .fact dd {
+  margin: 0;
+  color: var(--ink);
+}
+
+/* --------------------------------------------------------------------------
+   BODY
+   -------------------------------------------------------------------------- */
+
+.project-body {
+  display: flex;
+  flex-direction: column;
+  gap: 7vh;
+}
+
+.project-block {
+  max-width: 68ch;
+}
+
+.project-block .t-label {
+  display: block;
+  margin-bottom: 1.1em;
+  letter-spacing: var(--track-wide);
+}
+
+.project-summary {
+  color: var(--ink);
+}
+
+/* media placeholders — glass slots ready for real imagery */
+.project-media {
+  display: grid;
+  place-items: center;
+  min-height: clamp(220px, 42vh, 520px);
+  margin: 0;
+  border-radius: 2px;
+  letter-spacing: var(--track-wide);
+  /* faintest possible wash of the active wavelength, so empty slots still
+     belong to this project rather than looking like generic grey boxes */
+  background:
+    radial-gradient(
+      120% 90% at 50% 100%,
+      color-mix(in srgb, var(--spectrum-primary) 7%, transparent),
+      transparent 70%
+    ),
+    var(--glass-fill);
+  border: 1px solid var(--glass-edge);
+  backdrop-filter: blur(var(--glass-blur));
+}
+
+.project-media.is-half { min-height: clamp(180px, 32vh, 400px); }
+
+.project-media-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--grid-gap);
+}
+
+/* --------------------------------------------------------------------------
+   PREV / NEXT WAVELENGTH
+   -------------------------------------------------------------------------- */
+
+.project-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--grid-gap);
+  margin-top: 10vh;
+  padding-top: 6vh;
+  border-top: 1px solid var(--ink-trace);
+}
+
+.project-nav-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8em;
+  padding: 3vh 2vw;
+  text-align: left;
+  background: transparent;
+  border: 1px solid var(--glass-edge);
+  border-radius: 2px;
+  color: var(--ink);
+  cursor: pointer;
+  transition:
+    border-color var(--dur-fast) var(--ease-glass),
+    background var(--dur-fast) var(--ease-glass),
+    transform var(--dur-fast) var(--ease-glass);
+}
+
+.project-nav-item.is-next {
+  text-align: right;
+  align-items: flex-end;
+}
+
+/* hover previews the destination wavelength — the light arrives before the page */
+.project-nav-item:hover {
+  border-color: color-mix(in srgb, var(--nav-color) 55%, transparent);
+  background: radial-gradient(
+    140% 100% at 50% 100%,
+    color-mix(in srgb, var(--nav-color) 12%, transparent),
+    transparent 72%
+  );
+  transform: translateY(-2px);
+}
+
+.project-nav-item .t-h3 {
+  font-family: var(--font-serif);
+  letter-spacing: var(--track-tight);
+}
+
+.project-nav-item .nav-wl {
+  color: var(--nav-color);
+  letter-spacing: var(--track-wide);
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 900px) {
+  .project-media-pair,
+  .project-nav {
+    grid-template-columns: 1fr;
+  }
+  .project-nav-item.is-next {
+    text-align: left;
+    align-items: flex-start;
+  }
+  .project-back {
+    top: auto;
+    bottom: 2vh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-view,
+  .project-spectrum-band .band-fill {
+    animation: none;
+  }
+  .project-spectrum-band .band-fill { transform: none; opacity: 1; }
+}

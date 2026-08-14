@@ -1,0 +1,911 @@
+/* ==========================================================================
+   PRISM — SECTIONS & COMPONENTS
+   Layout, composition, and motion for every section + UI overlay.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   SITE WRAPPER
+   -------------------------------------------------------------------------- */
+
+.site {
+  position: relative;
+  z-index: var(--z-content);
+  min-height: 100vh;
+}
+
+/* --------------------------------------------------------------------------
+   SCENE CANVAS (fixed WebGL behind everything)
+   -------------------------------------------------------------------------- */
+
+.scene-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-canvas);
+  pointer-events: none;
+}
+.scene-canvas canvas {
+  pointer-events: auto; /* only the canvas itself receives pointer events */
+}
+
+/* --------------------------------------------------------------------------
+   SECTION BASE
+   -------------------------------------------------------------------------- */
+
+.section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: calc(var(--nav-h) + 4vh) var(--gutter) 8vh;
+}
+
+/* --------------------------------------------------------------------------
+   00 / PRISM — HERO
+   Full-screen immersive. Prism is visually centred via 3D.
+   HTML provides editorial overlay with minimal UI.
+   -------------------------------------------------------------------------- */
+
+.section-hero {
+  min-height: 100svh;
+  align-items: center;
+  justify-content: center;
+  padding-top: var(--nav-h);
+  overflow: hidden;
+}
+
+/* The stack is a single centred column; the two type layers are offset from it
+   so the crystal (fixed, behind) reads as sitting *inside* the wordmark. */
+.hero-stack {
+  position: relative;
+  width: 100%;
+  z-index: var(--z-grid);
+  display: grid;
+  justify-items: center;
+}
+
+.hero-line {
+  position: relative;
+  width: 100%;
+  display: flex;
+  pointer-events: none;
+}
+
+/* upper line pulls left, lower line pushes right — the offset is the point */
+.hero-line-top {
+  justify-content: flex-start;
+  margin-left: -1vw;
+}
+
+.hero-line-bottom {
+  justify-content: flex-end;
+  margin-right: -1vw;
+  /* overlap the lines slightly so they read as one composition */
+  margin-top: -2.2vh;
+}
+
+/* the crystal must remain visible between the layers, so the solid line sits
+   above the canvas while the outlined one lets light through */
+.hero-line-top .mega-title { position: relative; z-index: 2; }
+.hero-line-bottom .mega-title { position: relative; z-index: 1; }
+
+/* ---- meta row, threaded between the two type layers ---- */
+.hero-meta {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.hero-kicker {
+  color: var(--ink-dim);
+  letter-spacing: var(--track-wide);
+}
+
+.hero-year {
+  color: var(--ink-dim);
+  letter-spacing: var(--track-wide);
+}
+
+/* ---- thesis ---- */
+.hero-thesis {
+  margin-top: 6vh;
+  max-width: 34ch;
+  text-align: center;
+  font-family: var(--font-serif);
+  line-height: var(--lead-snug);
+}
+
+/* ---- chain + scroll hint ---- */
+.hero-chain {
+  position: absolute;
+  bottom: -14vh;
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  opacity: 0.24;
+  font-size: var(--t-micro);
+}
+.chain-arrow { opacity: 0.4; }
+
+.hero-scroll {
+  position: absolute;
+  bottom: -14vh;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8em;
+  opacity: 0.38;
+}
+
+.scroll-line {
+  width: 1px;
+  height: 3.2vh;
+  background: linear-gradient(to bottom, var(--ink-mute), transparent);
+  animation: scroll-pulse 2.2s ease-in-out infinite;
+}
+@keyframes scroll-pulse {
+  0%, 100% { transform: scaleY(1); opacity: 0.38; }
+  50%      { transform: scaleY(1.3); opacity: 0.7; }
+}
+
+/* --------------------------------------------------------------------------
+   NAVIGATION
+   Fixed, minimal, glass-backed. Editorial feel.
+   -------------------------------------------------------------------------- */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-nav);
+  padding: 1.2vh var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.nav > *,
+.nav-inner {
+  pointer-events: auto;
+}
+
+.nav-inner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2em;
+}
+
+.nav-brand {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: var(--t-small);
+  letter-spacing: var(--track-wide);
+  opacity: 0.85;
+  transition: opacity var(--dur-fast) var(--ease-optic);
+}
+.nav-brand:hover { opacity: 1; }
+.nav-brand .t-pixel { color: var(--ink); }
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 0.4em;
+}
+
+.nav-link {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35em;
+  padding: 0.4em 0.7em;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--ink-dim);
+  font-family: var(--font-sans);
+  font-size: var(--t-small);
+  font-weight: 300;
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+  transition:
+    color var(--dur-base) var(--ease-optic),
+    opacity var(--dur-fast) var(--ease-optic);
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background: var(--spectrum-primary);
+  transition:
+    width var(--dur-base) var(--ease-optic),
+    left var(--dur-base) var(--ease-optic);
+}
+
+.nav-link:hover,
+.nav-link.is-active {
+  color: var(--ink);
+}
+.nav-link:hover::after,
+.nav-link.is-active::after {
+  width: 100%;
+  left: 0;
+}
+
+.nav-index {
+  font-family: var(--font-mono);
+  font-size: 0.72em;
+  opacity: 0.45;
+}
+
+.nav-state {
+  opacity: 0.22;
+  font-size: 0.68em;
+}
+
+/* --------------------------------------------------------------------------
+   LOADER
+   -------------------------------------------------------------------------- */
+
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-loader);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--void);
+  animation: loader-fadeout 0.6s var(--ease-optic) 0.15s forwards;
+  pointer-events: none;
+}
+@keyframes loader-fadeout {
+  to { opacity: 0; pointer-events: none; }
+}
+
+.loader-inner {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2em;
+}
+
+.loader-kicker {
+  letter-spacing: var(--track-widest);
+  opacity: 0.55;
+}
+
+.loader-title {
+  letter-spacing: var(--track-display);
+}
+
+.loader-bar {
+  width: 120px;
+  height: 1px;
+  background: var(--ink-trace);
+  overflow: hidden;
+}
+
+.loader-fill {
+  height: 100%;
+  background: var(--ink);
+  transition: width 0.12s linear;
+}
+
+.loader-progress {
+  opacity: 0.38;
+}
+
+/* --------------------------------------------------------------------------
+   TRANSITION CURTAIN
+
+   A refracting glass sheet sweeps across the frame carrying the destination
+   wavelength — light passing through a prism edge, not a cross-fade.
+   The leading edge is a chromatic seam; the body is dark glass.
+   -------------------------------------------------------------------------- */
+
+.transition-curtain {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-transition);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* the dark glass body of the sheet */
+.curtain-glass {
+  position: absolute;
+  inset: -12% -30%;
+  background:
+    linear-gradient(
+      100deg,
+      rgba(4, 5, 10, 0) 0%,
+      rgba(4, 5, 10, 0.72) 16%,
+      var(--void) 34%,
+      var(--void) 66%,
+      rgba(4, 5, 10, 0.72) 84%,
+      rgba(4, 5, 10, 0) 100%
+    );
+  transform: translate3d(-118%, 0, 0);
+  will-change: transform;
+}
+
+/* the chromatic leading edge — this is the "light" doing the work */
+.curtain-edge {
+  position: absolute;
+  top: -12%;
+  bottom: -12%;
+  left: 0;
+  width: 46vw;
+  transform: translate3d(-140%, 0, 0);
+  will-change: transform;
+  background:
+    linear-gradient(
+      100deg,
+      transparent 0%,
+      color-mix(in srgb, var(--curtain-color) 30%, transparent) 62%,
+      color-mix(in srgb, var(--curtain-color) 85%, white) 88%,
+      #ffffff 96%,
+      transparent 100%
+    );
+  filter: blur(14px);
+  mix-blend-mode: screen;
+}
+
+/* sweep in — decelerating, heavy glass */
+.curtain-in .curtain-glass {
+  animation: sheet-in 620ms var(--ease-glass, cubic-bezier(0.22, 1, 0.36, 1)) forwards;
+}
+.curtain-in .curtain-edge {
+  animation: edge-in 620ms var(--ease-glass, cubic-bezier(0.22, 1, 0.36, 1)) forwards;
+}
+
+/* opaque dwell — the DOM swap happens here */
+.curtain-hold .curtain-glass { transform: translate3d(0, 0, 0); }
+.curtain-hold .curtain-edge  { transform: translate3d(118%, 0, 0); opacity: 0.5; }
+
+/* sweep out — continues in the same direction, never reverses */
+.curtain-out .curtain-glass {
+  animation: sheet-out 700ms var(--ease-glass, cubic-bezier(0.22, 1, 0.36, 1)) forwards;
+}
+.curtain-out .curtain-edge {
+  animation: edge-out 700ms var(--ease-glass, cubic-bezier(0.22, 1, 0.36, 1)) forwards;
+}
+
+@keyframes sheet-in {
+  from { transform: translate3d(-118%, 0, 0); }
+  to   { transform: translate3d(0, 0, 0); }
+}
+@keyframes sheet-out {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(118%, 0, 0); }
+}
+@keyframes edge-in {
+  from { transform: translate3d(-140%, 0, 0); opacity: 1; }
+  to   { transform: translate3d(118%, 0, 0); opacity: 0.5; }
+}
+@keyframes edge-out {
+  from { transform: translate3d(118%, 0, 0); opacity: 0.5; }
+  to   { transform: translate3d(260%, 0, 0); opacity: 0; }
+}
+
+/* reduced motion: no sweep, just a brief dim — content stays readable */
+@media (prefers-reduced-motion: reduce) {
+  .curtain-edge { display: none; }
+  .curtain-glass {
+    inset: 0;
+    background: var(--void);
+    transform: none;
+    animation: none !important;
+    opacity: 0;
+    transition: opacity 200ms linear;
+  }
+  .curtain-in .curtain-glass,
+  .curtain-hold .curtain-glass { opacity: 1; }
+  .curtain-out .curtain-glass { opacity: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   01 / WHITE LIGHT — ABOUT
+   -------------------------------------------------------------------------- */
+
+.section-about {
+  min-height: auto;
+  padding-top: 16vh;
+  padding-bottom: 16vh;
+  align-items: flex-start;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+  gap: var(--grid-gap);
+  opacity: 0;
+  transform: translateY(3vh);
+  transition:
+    opacity var(--dur-slow) var(--ease-drift),
+    transform var(--dur-slow) var(--ease-drift);
+}
+.about-grid.is-shown {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-header {
+  margin-bottom: 6vh;
+}
+.about-header h2 {
+  margin-top: 0.3em;
+  margin-bottom: 0.4em;
+}
+
+.about-statement {
+  padding: 3em;
+  margin-bottom: var(--grid-gap);
+}
+
+.about-blocks {
+  display: flex;
+  flex-direction: column;
+  gap: var(--grid-gap);
+}
+
+.about-placeholder {
+  padding: 2em 2.4em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+  transition:
+    border-color var(--dur-base) var(--ease-glass),
+    background var(--dur-base) var(--ease-glass);
+}
+.about-placeholder:hover {
+  border-color: var(--glass-edge-lit);
+  background: var(--glass-fill-2);
+}
+
+/* --------------------------------------------------------------------------
+   02 / SPECTRUM — WORK
+   -------------------------------------------------------------------------- */
+
+.section-work {
+  min-height: auto;
+  padding-top: 20vh;
+  padding-bottom: 20vh;
+  align-items: flex-start;
+}
+
+.work-wrap {
+  opacity: 0;
+  transform: translateY(4vh);
+  transition:
+    opacity 1s var(--ease-drift),
+    transform 1s var(--ease-drift);
+}
+.work-wrap.is-shown {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.work-header {
+  margin-bottom: 8vh;
+}
+.work-header h2 {
+  margin-top: 0.3em;
+  margin-bottom: 0.5em;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--grid-gap);
+}
+
+/* ---- project card ---- */
+.project-card {
+  position: relative;
+  padding: 2.4em;
+  cursor: pointer;
+  overflow: hidden;
+  transition:
+    transform var(--dur-base) var(--ease-glass),
+    border-color var(--dur-base) var(--ease-glass),
+    box-shadow var(--dur-base) var(--ease-glass);
+  opacity: 0;
+  transform: translateY(3vh);
+}
+.project-card.is-shown {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.65s var(--ease-drift),
+    transform 0.65s var(--ease-drift),
+    border-color var(--dur-base) var(--ease-glass),
+    box-shadow var(--dur-base) var(--ease-glass);
+}
+
+/* staggered reveal per card */
+.project-card:nth-child(1).is-shown { transition-delay: 0ms; }
+.project-card:nth-child(2).is-shown { transition-delay: 80ms; }
+.project-card:nth-child(3).is-shown { transition-delay: 160ms; }
+.project-card:nth-child(4).is-shown { transition-delay: 240ms; }
+.project-card:nth-child(5).is-shown { transition-delay: 320ms; }
+.project-card:nth-child(6).is-shown { transition-delay: 400ms; }
+
+.project-card:hover {
+  transform: translateY(-0.4vh);
+  border-color: var(--project-color, var(--glass-edge-lit));
+  box-shadow:
+    0 0 40px -10px var(--project-glow, transparent),
+    0 20px 60px -20px rgba(0, 0, 0, 0.5);
+}
+
+.card-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8em;
+  margin-bottom: 1em;
+}
+
+.card-index {
+  font-size: var(--t-h3);
+  color: var(--project-color, var(--ink-dim));
+}
+
+.card-wavelength {
+  font-weight: 400;
+}
+
+.card-nm {
+  opacity: 0.4;
+}
+
+.card-title {
+  margin-bottom: 1em;
+  line-height: 1.15;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+}
+
+.card-summary {
+  margin-top: 0.8em;
+  max-width: 36ch;
+}
+
+/* spectrum bar at card bottom */
+.card-spectrum-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  opacity: 0;
+  transition: opacity var(--dur-base) var(--ease-glass);
+}
+.project-card:hover .card-spectrum-bar {
+  opacity: 1;
+}
+
+/* hover glow overlay */
+.card-glow {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity var(--dur-base) var(--ease-glass);
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+.project-card:hover .card-glow {
+  opacity: 0.5;
+}
+
+/* --------------------------------------------------------------------------
+   03 / BEYOND
+   -------------------------------------------------------------------------- */
+
+.section-beyond {
+  min-height: auto;
+  padding-top: 16vh;
+  padding-bottom: 16vh;
+  align-items: flex-start;
+}
+
+.beyond-grid {
+  opacity: 0;
+  transform: translateY(3vh);
+  transition:
+    opacity var(--dur-slow) var(--ease-drift),
+    transform var(--dur-slow) var(--ease-drift);
+}
+.beyond-grid.is-shown {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.beyond-header {
+  margin-bottom: 6vh;
+}
+.beyond-header h2 {
+  margin-top: 0.3em;
+  margin-bottom: 0.4em;
+}
+
+.beyond-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--grid-gap);
+}
+
+.beyond-block {
+  padding: 2.4em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+}
+
+.beyond-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--grid-gap);
+  padding-top: var(--grid-gap);
+}
+
+.beyond-stat {
+  padding: 2em;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4em;
+}
+
+.stat-value {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  opacity: 0.7;
+}
+
+.stat-label {
+  opacity: 0.38;
+}
+
+/* --------------------------------------------------------------------------
+   04 / REFRACTION CONTINUES — CONTACT / ENDING
+   -------------------------------------------------------------------------- */
+
+.section-contact {
+  min-height: auto;
+  padding-top: 20vh;
+  padding-bottom: 14vh;
+  align-items: flex-start;
+}
+
+.contact-wrap {
+  opacity: 0;
+  transform: translateY(3vh);
+  transition:
+    opacity var(--dur-slow) var(--ease-drift),
+    transform var(--dur-slow) var(--ease-drift);
+}
+.contact-wrap.is-shown {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.contact-header {
+  margin-bottom: 8vh;
+}
+.contact-header h2 {
+  margin-top: 0.3em;
+  margin-bottom: 0.5em;
+}
+
+.contact-body {
+  margin-top: 4vh;
+}
+
+.contact-block {
+  padding: 3em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8em;
+}
+
+.contact-closure {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: 2em;
+}
+
+.contact-chain {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  margin-top: 1.2em;
+  opacity: 0.45;
+  font-size: var(--t-micro);
+}
+
+/* --------------------------------------------------------------------------
+   GRID SPAN HELPERS (used in sections)
+   -------------------------------------------------------------------------- */
+
+.grid-span-2  { grid-column: span 2; }
+.grid-span-3  { grid-column: span 3; }
+.grid-span-4  { grid-column: span 4; }
+.grid-span-5  { grid-column: span 5; }
+.grid-span-6  { grid-column: span 6; }
+.grid-span-7  { grid-column: span 7; }
+.grid-span-8  { grid-column: span 8; }
+.grid-span-9  { grid-column: span 9; }
+.grid-span-10 { grid-column: span 10; }
+.grid-span-11 { grid-column: span 11; }
+.grid-span-12 { grid-column: span 12; }
+
+/* --------------------------------------------------------------------------
+   CV CONTENT HELPERS (text from data/cv.js)
+   -------------------------------------------------------------------------- */
+.about-name {
+  color: var(--ink, #f4f5f7);
+  opacity: 0.92;
+  margin-bottom: 0.4em;
+}
+.cv-block + .cv-block {
+  margin-top: 1.1em;
+}
+.cv-line {
+  margin: 0;
+  line-height: 1.55;
+}
+.cv-line + .cv-line {
+  margin-top: 0.4em;
+}
+.cv-sub {
+  margin-top: 1em;
+}
+.cv-k {
+  color: var(--ink, #f4f5f7);
+  opacity: 0.85;
+}
+.cv-meta {
+  margin-top: 0.2em;
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE — TABLET
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 1024px) {
+  .section {
+    padding-left: clamp(18px, 4vw, 32px);
+    padding-right: clamp(18px, 4vw, 32px);
+  }
+
+  .hero-identity {
+    top: auto;
+    bottom: 48vh;
+  }
+
+  .hero-chain {
+    display: none;
+  }
+
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-statement,
+  .about-blocks {
+    grid-column: span 12;
+  }
+
+  .beyond-content,
+  .beyond-sidebar {
+    grid-column: span 12;
+  }
+
+  .contact-block,
+  .contact-closure {
+    grid-column: span 12;
+  }
+
+  .nav-links {
+    gap: 0;
+  }
+
+  .nav-label {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE — MOBILE
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 640px) {
+  .section-hero {
+    min-height: 90svh;
+    padding-bottom: 6vh;
+  }
+
+  .hero-identity {
+    bottom: auto;
+    top: 4vh;
+    position: relative;
+  }
+
+  .hero-title {
+    font-size: clamp(2.4rem, 12vw, 4.5rem);
+  }
+
+  .hero-scroll {
+    display: none;
+  }
+
+  .nav-brand .t-pixel {
+    font-size: var(--t-small);
+  }
+
+  .nav-state {
+    display: none;
+  }
+
+  .about-statement {
+    padding: 2em;
+  }
+
+  .project-card {
+    padding: 1.6em;
+  }
+
+  .card-title {
+    font-size: var(--t-h3);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   REDUCED MOTION
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .about-grid,
+  .work-wrap,
+  .beyond-grid,
+  .contact-wrap,
+  .project-card {
+    transition: opacity 0.01ms;
+    transform: none !important;
+  }
+
+  .scroll-line {
+    animation: none;
+  }
+
+  .loader {
+    animation: none;
+  }
+
+  .transition-in .curtain-glass,
+  .transition-out .curtain-glass {
+    animation-duration: 0.01ms;
+  }
+}

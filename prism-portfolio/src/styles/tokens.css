@@ -1,0 +1,110 @@
+/* ==========================================================================
+   PRISM — DESIGN TOKENS
+   Single source of truth for the whole visual system.
+   Ratio target: 70% black space / 20% glass / 10% spectrum light.
+   ========================================================================== */
+
+:root {
+  /* ---------- 1. SPACE / VOID ---------- */
+  --void:        #04050a;
+  --void-lift:   #070911;
+  --navy-abyss:  #080c1a;
+  --navy-deep:   #0b1124;
+  --navy-haze:   #101a33;
+
+  /* ---------- 2. INK ---------- */
+  --ink:         #f4f5f7;
+  --ink-strong:  #ffffff;
+  --ink-mute:    rgba(244, 245, 247, 0.62);
+  --ink-dim:     rgba(244, 245, 247, 0.38);
+  --ink-ghost:   rgba(244, 245, 247, 0.16);
+  --ink-trace:   rgba(244, 245, 247, 0.075);
+
+  /* ---------- 3. GLASS ---------- */
+  --glass-fill:      rgba(255, 255, 255, 0.028);
+  --glass-fill-2:    rgba(255, 255, 255, 0.055);
+  --glass-edge:      rgba(255, 255, 255, 0.11);
+  --glass-edge-lit:  rgba(255, 255, 255, 0.24);
+  --glass-blur:      18px;
+  --glass-blur-lg:   40px;
+
+  /* ---------- 4. SPECTRUM (light only — never a page background) ---------- */
+  --sp-red:     #ff2d3e;
+  --sp-orange:  #ff7a18;
+  --sp-amber:   #ffc53d;
+  --sp-yellow:  #ffe94d;
+  --sp-green:   #2bd9a6;
+  --sp-cyan:    #38c8ff;
+  --sp-sky:     #46b7ff;
+  --sp-blue:    #2e6bff;
+  --sp-violet:  #8b5cff;
+  --sp-purple:  #7a2bff;
+  --sp-magenta: #ff3fd0;
+  --sp-pink:    #ff5fa8;
+  --sp-white:   #ffffff;
+
+  /* active spectrum — rewritten at runtime by the store (project selection) */
+  --spectrum-primary:   #f4f5f7;
+  --spectrum-secondary: #8b5cff;
+  --spectrum-glow:      rgba(244, 245, 247, 0.5);
+
+  /* ---------- 5. TYPE ---------- */
+  --font-serif: 'Instrument Serif', 'Times New Roman', serif;
+  --font-sans:  'Inter Tight', -apple-system, 'Helvetica Neue', sans-serif;
+  --font-mono:  'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
+  --font-pixel: 'Silkscreen', 'JetBrains Mono', monospace;
+
+  /* fluid editorial scale */
+  --t-display: clamp(3.4rem, 9.2vw, 10.5rem);
+  --t-h1:      clamp(2.4rem, 5.6vw, 5.6rem);
+  --t-h2:      clamp(1.7rem, 3.1vw, 3.1rem);
+  --t-h3:      clamp(1.15rem, 1.55vw, 1.6rem);
+  --t-body:    clamp(0.9rem, 1.02vw, 1.06rem);
+  --t-small:   clamp(0.72rem, 0.78vw, 0.82rem);
+  --t-micro:   clamp(0.575rem, 0.66vw, 0.7rem);
+
+  --lead-tight: 0.92;
+  --lead-snug:  1.12;
+  --lead-body:  1.62;
+
+  --track-display: -0.035em;
+  --track-tight:   -0.018em;
+  --track-wide:    0.16em;
+  --track-widest:  0.34em;
+
+  /* ---------- 6. GRID / LAYOUT ---------- */
+  --gutter:     clamp(18px, 3.2vw, 56px);
+  --grid-cols:  12;
+  --grid-gap:   clamp(12px, 1.4vw, 26px);
+  --measure:    62ch;
+  --rule:       1px;
+  --nav-h:      clamp(58px, 5.4vw, 84px);
+
+  /* ---------- 7. MOTION — slow, smooth, inertial, cinematic ---------- */
+  --ease-optic: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-glass: cubic-bezier(0.22, 0.61, 0.24, 1);
+  --ease-inout: cubic-bezier(0.62, 0.02, 0.24, 1);
+  --ease-drift: cubic-bezier(0.33, 0, 0.15, 1);
+
+  --dur-tap:   240ms;
+  --dur-fast:  420ms;
+  --dur-base:  760ms;
+  --dur-slow:  1180ms;
+  --dur-epic:  1800ms;
+
+  /* ---------- 8. DEPTH ---------- */
+  --z-canvas:     0;
+  --z-grid:       5;
+  --z-content:    10;
+  --z-nav:        40;
+  --z-transition: 70;
+  --z-loader:     90;
+}
+
+/* Reduced motion: strip duration, keep the composition intact. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-tap: 1ms; --dur-fast: 1ms; --dur-base: 1ms;
+    --dur-slow: 1ms; --dur-epic: 1ms;
+  }
+}
