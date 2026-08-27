@@ -1,5 +1,5 @@
 {
-  "exportedAt": "2026-08-26T00:56:00.347681+00:00",
+  "exportedAt": "2026-08-27T06:36:54.905323+00:00",
   "focus": "北京 · 交互/视觉/AIGC/产品设计 · 互联网大厂/AI公司/外企",
   "jobs": [
     {
@@ -67,13 +67,13 @@
       "priorityKind": "外企"
     },
     {
-      "id": "nc-pw-457592",
+      "id": "nc-pw-457591",
       "company": "美团\n互联网综合\n10000人以上\n校招高薪榜",
-      "title": "AI产品经理",
+      "title": "【校招】AI创新产品经理-北京&上海",
       "city": "北京",
       "batch": "2027 秋招",
-      "url": "https://www.nowcoder.com/jobs/detail/457592?deliverSource=1&pageSource=5001&channel=npJobTab&logid=32673e9fe5749ec85dbbf6f66aff1e9c",
-      "publishedAt": "2026-08-24T00:53:12.815874+00:00",
+      "url": "https://www.nowcoder.com/jobs/detail/457591?deliverSource=1&pageSource=5001&channel=npJobTab&logid=f286f207d1a344a90dee720703f14c70",
+      "publishedAt": "2026-08-27T06:34:52.538572+00:00",
       "deadline": "",
       "source": "牛客网·校招职位",
       "verification": "待核验",
@@ -81,7 +81,24 @@
       "notes": "",
       "target": true,
       "priorityKind": "互联网大厂",
-      "createdAt": "2026-08-24T00:53:13.361310+00:00"
+      "createdAt": "2026-08-27T06:34:52.899242+00:00"
+    },
+    {
+      "id": "nc-pw-457592",
+      "company": "美团\n互联网综合\n10000人以上\n校招高薪榜",
+      "title": "AI产品经理",
+      "city": "北京",
+      "batch": "2027 秋招",
+      "url": "https://www.nowcoder.com/jobs/detail/457592?deliverSource=1&pageSource=5001&channel=npJobTab&logid=f286f207d1a344a90dee720703f14c70",
+      "publishedAt": "2026-08-27T06:34:52.697122+00:00",
+      "deadline": "",
+      "source": "牛客网·校招职位",
+      "verification": "待核验",
+      "status": "待投递",
+      "notes": "",
+      "target": true,
+      "priorityKind": "互联网大厂",
+      "createdAt": "2026-08-27T06:34:52.899264+00:00"
     },
     {
       "id": "nc-pw-458792",
@@ -116,23 +133,6 @@
       "target": true,
       "priorityKind": "互联网大厂",
       "createdAt": "2026-08-24T00:53:13.361338+00:00"
-    },
-    {
-      "id": "nc-pw-457591",
-      "company": "美团\n互联网综合\n10000人以上\n校招高薪榜",
-      "title": "【校招】AI创新产品经理-北京&上海",
-      "city": "北京",
-      "batch": "2027 秋招",
-      "url": "https://www.nowcoder.com/jobs/detail/457591?deliverSource=1&pageSource=5001&channel=npJobTab&logid=32673e9fe5749ec85dbbf6f66aff1e9c",
-      "publishedAt": "2026-08-24T00:53:13.018479+00:00",
-      "deadline": "",
-      "source": "牛客网·校招职位",
-      "verification": "待核验",
-      "status": "待投递",
-      "notes": "",
-      "target": true,
-      "priorityKind": "互联网大厂",
-      "createdAt": "2026-08-24T00:53:13.361343+00:00"
     },
     {
       "id": "nc-pw-459856",
