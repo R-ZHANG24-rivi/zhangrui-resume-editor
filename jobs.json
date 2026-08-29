@@ -1,5 +1,5 @@
 {
-  "exportedAt": "2026-08-28T08:26:49.998171+00:00",
+  "exportedAt": "2026-08-29T05:08:12.086156+00:00",
   "focus": "北京 · 交互/视觉/AIGC/产品设计 · 互联网大厂/AI公司/外企",
   "jobs": [
     {
@@ -67,6 +67,40 @@
       "priorityKind": "外企"
     },
     {
+      "id": "nc-pw-459856",
+      "company": "字节跳动\n互联网综合\n10000人以上\n校招高薪榜",
+      "title": "AI产品经理",
+      "city": "北京",
+      "batch": "2027 秋招",
+      "url": "https://www.nowcoder.com/jobs/detail/459856?deliverSource=1&pageSource=5001&channel=npJobTab&logid=98afedda4da2f02c54b399e2c5d3469d",
+      "publishedAt": "2026-08-29T05:06:12.226079+00:00",
+      "deadline": "",
+      "source": "牛客网·校招职位",
+      "verification": "待核验",
+      "status": "待投递",
+      "notes": "",
+      "target": true,
+      "priorityKind": "互联网大厂",
+      "createdAt": "2026-08-29T05:06:12.730045+00:00"
+    },
+    {
+      "id": "nc-pw-457592",
+      "company": "美团\n互联网综合\n10000人以上\n校招高薪榜",
+      "title": "AI产品经理",
+      "city": "北京",
+      "batch": "2027 秋招",
+      "url": "https://www.nowcoder.com/jobs/detail/457592?deliverSource=1&pageSource=5001&channel=npJobTab&logid=98afedda4da2f02c54b399e2c5d3469d",
+      "publishedAt": "2026-08-29T05:06:12.397875+00:00",
+      "deadline": "",
+      "source": "牛客网·校招职位",
+      "verification": "待核验",
+      "status": "待投递",
+      "notes": "",
+      "target": true,
+      "priorityKind": "互联网大厂",
+      "createdAt": "2026-08-29T05:06:12.730072+00:00"
+    },
+    {
       "id": "nc-pw-456907",
       "company": "小米\n企业服务\n暂无\n校招高薪榜\n环境不错",
       "title": "产品经理",
@@ -82,23 +116,6 @@
       "target": true,
       "priorityKind": "互联网大厂",
       "createdAt": "2026-08-28T08:25:03.417082+00:00"
-    },
-    {
-      "id": "nc-pw-457592",
-      "company": "美团\n互联网综合\n10000人以上\n校招高薪榜",
-      "title": "AI产品经理",
-      "city": "北京",
-      "batch": "2027 秋招",
-      "url": "https://www.nowcoder.com/jobs/detail/457592?deliverSource=1&pageSource=5001&channel=npJobTab&logid=743f3ebd135a90f751821cde0029b288",
-      "publishedAt": "2026-08-28T08:25:02.955245+00:00",
-      "deadline": "",
-      "source": "牛客网·校招职位",
-      "verification": "待核验",
-      "status": "待投递",
-      "notes": "",
-      "target": true,
-      "priorityKind": "互联网大厂",
-      "createdAt": "2026-08-28T08:25:03.417106+00:00"
     },
     {
       "id": "nc-pw-458792",
@@ -133,23 +150,6 @@
       "target": true,
       "priorityKind": "互联网大厂",
       "createdAt": "2026-08-28T08:25:03.417116+00:00"
-    },
-    {
-      "id": "nc-pw-459856",
-      "company": "字节跳动\n互联网综合\n10000人以上\n校招高薪榜",
-      "title": "AI产品经理",
-      "city": "北京",
-      "batch": "2027 秋招",
-      "url": "https://www.nowcoder.com/jobs/detail/459856?deliverSource=1&pageSource=5001&channel=npJobTab&logid=32673e9fe5749ec85dbbf6f66aff1e9c",
-      "publishedAt": "2026-08-24T00:53:13.148451+00:00",
-      "deadline": "",
-      "source": "牛客网·校招职位",
-      "verification": "待核验",
-      "status": "待投递",
-      "notes": "",
-      "target": true,
-      "priorityKind": "互联网大厂",
-      "createdAt": "2026-08-24T00:53:13.361354+00:00"
     },
     {
       "id": "nc-pw-460116",
@@ -233,6 +233,23 @@
       "target": false,
       "priorityKind": "",
       "createdAt": "2026-08-11T11:23:36.478336+00:00"
+    },
+    {
+      "id": "nc-pw-464149",
+      "company": "泰安三只猴网络科技有限公司\n通信电子\n暂无",
+      "title": "产品运营",
+      "city": "北京",
+      "batch": "2027 秋招",
+      "url": "https://www.nowcoder.com/jobs/detail/464149?deliverSource=1&pageSource=5001&channel=npJobTab&logid=98afedda4da2f02c54b399e2c5d3469d",
+      "publishedAt": "2026-08-29T05:06:12.371444+00:00",
+      "deadline": "",
+      "source": "牛客网·校招职位",
+      "verification": "待核验",
+      "status": "待投递",
+      "notes": "",
+      "target": false,
+      "priorityKind": "",
+      "createdAt": "2026-08-29T05:06:12.730066+00:00"
     },
     {
       "id": "nc-pw-460860",
