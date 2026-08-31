@@ -1,5 +1,5 @@
 {
-  "exportedAt": "2026-08-30T02:57:21.632305+00:00",
+  "exportedAt": "2026-08-31T02:52:04.150413+00:00",
   "focus": "北京 · 交互/视觉/AIGC/产品设计 · 互联网大厂/AI公司/外企",
   "jobs": [
     {
@@ -67,6 +67,23 @@
       "priorityKind": "外企"
     },
     {
+      "id": "nc-pw-457591",
+      "company": "美团\n互联网综合\n10000人以上\n校招高薪榜",
+      "title": "【校招】AI创新产品经理-北京&上海",
+      "city": "北京",
+      "batch": "2027 秋招",
+      "url": "https://www.nowcoder.com/jobs/detail/457591?deliverSource=1&pageSource=5001&channel=npJobTab&logid=73bccea861e6f29b825fad4c4509813e",
+      "publishedAt": "2026-08-31T02:49:49.930555+00:00",
+      "deadline": "",
+      "source": "牛客网·校招职位",
+      "verification": "待核验",
+      "status": "待投递",
+      "notes": "",
+      "target": true,
+      "priorityKind": "互联网大厂",
+      "createdAt": "2026-08-31T02:49:50.207955+00:00"
+    },
+    {
       "id": "nc-pw-458792",
       "company": "小米集团\n硬件\n10000人以上\n校招高薪榜\n氛围很好",
       "title": "ai产品经理",
@@ -99,23 +116,6 @@
       "target": true,
       "priorityKind": "互联网大厂",
       "createdAt": "2026-08-30T02:56:03.518354+00:00"
-    },
-    {
-      "id": "nc-pw-457591",
-      "company": "美团\n互联网综合\n10000人以上\n校招高薪榜",
-      "title": "【校招】AI创新产品经理-北京&上海",
-      "city": "北京",
-      "batch": "2027 秋招",
-      "url": "https://www.nowcoder.com/jobs/detail/457591?deliverSource=1&pageSource=5001&channel=npJobTab&logid=444372948785f4b1826b62f059d1c68f",
-      "publishedAt": "2026-08-30T02:56:03.106531+00:00",
-      "deadline": "",
-      "source": "牛客网·校招职位",
-      "verification": "待核验",
-      "status": "待投递",
-      "notes": "",
-      "target": true,
-      "priorityKind": "互联网大厂",
-      "createdAt": "2026-08-30T02:56:03.518360+00:00"
     },
     {
       "id": "nc-pw-457592",
@@ -233,6 +233,23 @@
       "target": false,
       "priorityKind": "",
       "createdAt": "2026-08-11T11:23:36.478336+00:00"
+    },
+    {
+      "id": "nc-pw-460858",
+      "company": "华为HUAWEI\n硬件\n10000人以上\n校招高薪榜\n工资高",
+      "title": "产品经理",
+      "city": "北京",
+      "batch": "2027 秋招",
+      "url": "https://www.nowcoder.com/jobs/detail/460858?deliverSource=1&pageSource=5001&channel=npJobTab&logid=73bccea861e6f29b825fad4c4509813e",
+      "publishedAt": "2026-08-31T02:49:49.717696+00:00",
+      "deadline": "",
+      "source": "牛客网·校招职位",
+      "verification": "待核验",
+      "status": "待投递",
+      "notes": "",
+      "target": false,
+      "priorityKind": "",
+      "createdAt": "2026-08-31T02:49:50.207936+00:00"
     },
     {
       "id": "nc-pw-464149",
