@@ -1,5 +1,5 @@
 {
-  "exportedAt": "2026-08-31T02:52:04.150413+00:00",
+  "exportedAt": "2026-09-01T03:01:02.440957+00:00",
   "focus": "北京 · 交互/视觉/AIGC/产品设计 · 互联网大厂/AI公司/外企",
   "jobs": [
     {
@@ -65,6 +65,23 @@
       "notes": "外企设计岗",
       "target": true,
       "priorityKind": "外企"
+    },
+    {
+      "id": "nc-pw-463640",
+      "company": "百度\n企业服务\n10000人以上\n校招高薪榜",
+      "title": "AI产品经理",
+      "city": "北京",
+      "batch": "2027 秋招",
+      "url": "https://www.nowcoder.com/jobs/detail/463640?deliverSource=1&pageSource=5001&channel=npJobTab&logid=1f3f9a0130b4d90c3b59dbd0c6d31c00",
+      "publishedAt": "2026-09-01T02:59:34.346219+00:00",
+      "deadline": "",
+      "source": "牛客网·校招职位",
+      "verification": "待核验",
+      "status": "待投递",
+      "notes": "",
+      "target": true,
+      "priorityKind": "互联网大厂",
+      "createdAt": "2026-09-01T02:59:34.805856+00:00"
     },
     {
       "id": "nc-pw-457591",
@@ -233,6 +250,23 @@
       "target": false,
       "priorityKind": "",
       "createdAt": "2026-08-11T11:23:36.478336+00:00"
+    },
+    {
+      "id": "nc-pw-462505",
+      "company": "水滴",
+      "title": "校招-AI产品经理（人才专项）",
+      "city": "北京",
+      "batch": "2027 秋招",
+      "url": "https://www.nowcoder.com/jobs/detail/462505?deliverSource=2&pageSource=5003",
+      "publishedAt": "2026-09-01T02:59:34.672601+00:00",
+      "deadline": "",
+      "source": "牛客网·校招职位",
+      "verification": "待核验",
+      "status": "待投递",
+      "notes": "",
+      "target": false,
+      "priorityKind": "",
+      "createdAt": "2026-09-01T02:59:34.805874+00:00"
     },
     {
       "id": "nc-pw-460858",
