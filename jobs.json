@@ -1,5 +1,5 @@
 {
-  "exportedAt": "2026-09-05T02:24:27.215810+00:00",
+  "exportedAt": "2026-09-06T02:21:15.201094+00:00",
   "focus": "北京 · 交互/视觉/AIGC/产品设计 · 互联网大厂/AI公司/外企",
   "jobs": [
     {
@@ -65,6 +65,40 @@
       "notes": "外企设计岗",
       "target": true,
       "priorityKind": "外企"
+    },
+    {
+      "id": "nc-pw-443976",
+      "company": "美团\n互联网综合\n10000人以上\n校招高薪榜",
+      "title": "AI产品经理（加急）",
+      "city": "北京",
+      "batch": "2027 秋招",
+      "url": "https://www.nowcoder.com/jobs/detail/443976?deliverSource=1&pageSource=5001&channel=npJobTab&logid=e16e59d2fab931888497b0fd480d8923",
+      "publishedAt": "2026-09-06T02:19:15.086671+00:00",
+      "deadline": "",
+      "source": "牛客网·校招职位",
+      "verification": "待核验",
+      "status": "待投递",
+      "notes": "",
+      "target": true,
+      "priorityKind": "互联网大厂",
+      "createdAt": "2026-09-06T02:19:15.496595+00:00"
+    },
+    {
+      "id": "nc-pw-459856",
+      "company": "字节跳动\n互联网综合\n10000人以上\n校招高薪榜",
+      "title": "AI产品经理",
+      "city": "北京",
+      "batch": "2027 秋招",
+      "url": "https://www.nowcoder.com/jobs/detail/459856?deliverSource=1&pageSource=5001&channel=npJobTab&logid=e16e59d2fab931888497b0fd480d8923",
+      "publishedAt": "2026-09-06T02:19:15.206318+00:00",
+      "deadline": "",
+      "source": "牛客网·校招职位",
+      "verification": "待核验",
+      "status": "待投递",
+      "notes": "",
+      "target": true,
+      "priorityKind": "互联网大厂",
+      "createdAt": "2026-09-06T02:19:15.496612+00:00"
     },
     {
       "id": "nc-pw-458792",
@@ -150,23 +184,6 @@
       "target": true,
       "priorityKind": "互联网大厂",
       "createdAt": "2026-08-30T02:56:03.518364+00:00"
-    },
-    {
-      "id": "nc-pw-459856",
-      "company": "字节跳动\n互联网综合\n10000人以上\n校招高薪榜",
-      "title": "AI产品经理",
-      "city": "北京",
-      "batch": "2027 秋招",
-      "url": "https://www.nowcoder.com/jobs/detail/459856?deliverSource=1&pageSource=5001&channel=npJobTab&logid=98afedda4da2f02c54b399e2c5d3469d",
-      "publishedAt": "2026-08-29T05:06:12.226079+00:00",
-      "deadline": "",
-      "source": "牛客网·校招职位",
-      "verification": "待核验",
-      "status": "待投递",
-      "notes": "",
-      "target": true,
-      "priorityKind": "互联网大厂",
-      "createdAt": "2026-08-29T05:06:12.730045+00:00"
     },
     {
       "id": "nc-pw-460116",
