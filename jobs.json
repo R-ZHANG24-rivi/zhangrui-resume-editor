@@ -1,5 +1,5 @@
 {
-  "exportedAt": "2026-09-06T02:21:15.201094+00:00",
+  "exportedAt": "2026-09-07T02:18:05.227243+00:00",
   "focus": "北京 · 交互/视觉/AIGC/产品设计 · 互联网大厂/AI公司/外企",
   "jobs": [
     {
@@ -67,6 +67,23 @@
       "priorityKind": "外企"
     },
     {
+      "id": "nc-pw-458792",
+      "company": "小米集团\n硬件\n10000人以上\n校招高薪榜\n氛围很好",
+      "title": "ai产品经理",
+      "city": "北京",
+      "batch": "2027 秋招",
+      "url": "https://www.nowcoder.com/jobs/detail/458792?deliverSource=1&pageSource=5001&channel=npJobTab&logid=266263f67ffcc3810a2f64ce46122134",
+      "publishedAt": "2026-09-07T02:16:31.134431+00:00",
+      "deadline": "",
+      "source": "牛客网·校招职位",
+      "verification": "待核验",
+      "status": "待投递",
+      "notes": "",
+      "target": true,
+      "priorityKind": "互联网大厂",
+      "createdAt": "2026-09-07T02:16:31.563746+00:00"
+    },
+    {
       "id": "nc-pw-443976",
       "company": "美团\n互联网综合\n10000人以上\n校招高薪榜",
       "title": "AI产品经理（加急）",
@@ -99,23 +116,6 @@
       "target": true,
       "priorityKind": "互联网大厂",
       "createdAt": "2026-09-06T02:19:15.496612+00:00"
-    },
-    {
-      "id": "nc-pw-458792",
-      "company": "小米集团\n硬件\n10000人以上\n校招高薪榜\n氛围很好",
-      "title": "ai产品经理",
-      "city": "北京",
-      "batch": "2027 秋招",
-      "url": "https://www.nowcoder.com/jobs/detail/458792?deliverSource=1&pageSource=5001&channel=npJobTab&logid=59e84fb76c0cf93c1ffaee652f766237",
-      "publishedAt": "2026-09-04T02:22:34.371167+00:00",
-      "deadline": "",
-      "source": "牛客网·校招职位",
-      "verification": "待核验",
-      "status": "待投递",
-      "notes": "",
-      "target": true,
-      "priorityKind": "互联网大厂",
-      "createdAt": "2026-09-04T02:22:34.668561+00:00"
     },
     {
       "id": "nc-pw-456907",
@@ -286,6 +286,23 @@
       "createdAt": "2026-08-11T11:23:36.478336+00:00"
     },
     {
+      "id": "nc-pw-460858",
+      "company": "华为HUAWEI\n硬件\n10000人以上\n校招高薪榜\n工资高",
+      "title": "产品经理",
+      "city": "北京",
+      "batch": "2027 秋招",
+      "url": "https://www.nowcoder.com/jobs/detail/460858?deliverSource=1&pageSource=5001&channel=npJobTab&logid=266263f67ffcc3810a2f64ce46122134",
+      "publishedAt": "2026-09-07T02:16:31.254457+00:00",
+      "deadline": "",
+      "source": "牛客网·校招职位",
+      "verification": "待核验",
+      "status": "待投递",
+      "notes": "",
+      "target": false,
+      "priorityKind": "",
+      "createdAt": "2026-09-07T02:16:31.563761+00:00"
+    },
+    {
       "id": "nc-pw-465386",
       "company": "信也科技\n金融\n1000-9999人\n简历直投官网",
       "title": "2027届校招-产品经理（非洲业务）",
@@ -301,23 +318,6 @@
       "target": false,
       "priorityKind": "",
       "createdAt": "2026-09-05T02:23:13.814730+00:00"
-    },
-    {
-      "id": "nc-pw-460858",
-      "company": "华为HUAWEI\n硬件\n10000人以上\n校招高薪榜\n工资高",
-      "title": "产品经理",
-      "city": "北京",
-      "batch": "2027 秋招",
-      "url": "https://www.nowcoder.com/jobs/detail/460858?deliverSource=1&pageSource=5001&channel=npJobTab&logid=59e84fb76c0cf93c1ffaee652f766237",
-      "publishedAt": "2026-09-04T02:22:34.352201+00:00",
-      "deadline": "",
-      "source": "牛客网·校招职位",
-      "verification": "待核验",
-      "status": "待投递",
-      "notes": "",
-      "target": false,
-      "priorityKind": "",
-      "createdAt": "2026-09-04T02:22:34.668543+00:00"
     },
     {
       "id": "nc-pw-464680",
