@@ -1,5 +1,5 @@
 {
-  "exportedAt": "2026-09-07T02:18:05.227243+00:00",
+  "exportedAt": "2026-09-08T02:30:54.888642+00:00",
   "focus": "北京 · 交互/视觉/AIGC/产品设计 · 互联网大厂/AI公司/外企",
   "jobs": [
     {
@@ -67,6 +67,23 @@
       "priorityKind": "外企"
     },
     {
+      "id": "nc-pw-459856",
+      "company": "字节跳动\n互联网综合\n10000人以上\n校招高薪榜",
+      "title": "AI产品经理",
+      "city": "北京",
+      "batch": "2027 秋招",
+      "url": "https://www.nowcoder.com/jobs/detail/459856?deliverSource=1&pageSource=5001&channel=npJobTab&logid=8d3d5da4d9472720c9f8b7147d63616b",
+      "publishedAt": "2026-09-08T02:28:56.529603+00:00",
+      "deadline": "",
+      "source": "牛客网·校招职位",
+      "verification": "待核验",
+      "status": "待投递",
+      "notes": "",
+      "target": true,
+      "priorityKind": "互联网大厂",
+      "createdAt": "2026-09-08T02:28:56.737291+00:00"
+    },
+    {
       "id": "nc-pw-458792",
       "company": "小米集团\n硬件\n10000人以上\n校招高薪榜\n氛围很好",
       "title": "ai产品经理",
@@ -99,23 +116,6 @@
       "target": true,
       "priorityKind": "互联网大厂",
       "createdAt": "2026-09-06T02:19:15.496595+00:00"
-    },
-    {
-      "id": "nc-pw-459856",
-      "company": "字节跳动\n互联网综合\n10000人以上\n校招高薪榜",
-      "title": "AI产品经理",
-      "city": "北京",
-      "batch": "2027 秋招",
-      "url": "https://www.nowcoder.com/jobs/detail/459856?deliverSource=1&pageSource=5001&channel=npJobTab&logid=e16e59d2fab931888497b0fd480d8923",
-      "publishedAt": "2026-09-06T02:19:15.206318+00:00",
-      "deadline": "",
-      "source": "牛客网·校招职位",
-      "verification": "待核验",
-      "status": "待投递",
-      "notes": "",
-      "target": true,
-      "priorityKind": "互联网大厂",
-      "createdAt": "2026-09-06T02:19:15.496612+00:00"
     },
     {
       "id": "nc-pw-456907",
