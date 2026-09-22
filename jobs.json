@@ -1,5 +1,5 @@
 {
-  "exportedAt": "2026-09-21T02:47:08.272799+00:00",
+  "exportedAt": "2026-09-22T02:47:55.099981+00:00",
   "focus": "北京 · 交互/视觉/AIGC/产品设计 · 互联网大厂/AI公司/外企",
   "jobs": [
     {
@@ -72,8 +72,8 @@
       "title": "ai产品经理",
       "city": "北京",
       "batch": "2027 秋招",
-      "url": "https://www.nowcoder.com/jobs/detail/458792?deliverSource=1&pageSource=5001&channel=npJobTab&logid=0ebd387a22f20f4fbad2b1a221baf069",
-      "publishedAt": "2026-09-18T02:36:48.575716+00:00",
+      "url": "https://www.nowcoder.com/jobs/detail/458792?deliverSource=1&pageSource=5001&channel=npJobTab&logid=0b60cd463947c7526e034c4117e00039",
+      "publishedAt": "2026-09-22T02:46:01.711972+00:00",
       "deadline": "",
       "source": "牛客网·校招职位",
       "verification": "待核验",
@@ -81,7 +81,7 @@
       "notes": "",
       "target": true,
       "priorityKind": "互联网大厂",
-      "createdAt": "2026-09-18T02:36:49.058722+00:00"
+      "createdAt": "2026-09-22T02:46:01.985024+00:00"
     },
     {
       "id": "nc-pw-443976",
@@ -303,13 +303,13 @@
       "createdAt": "2026-08-11T11:23:36.478336+00:00"
     },
     {
-      "id": "nc-pw-30300000146154",
-      "company": "联想\n数据服务\n10000人以上\n校招高薪榜",
-      "title": "产品经理-AI方向-内推码DNK2026",
+      "id": "nc-pw-460858",
+      "company": "华为HUAWEI\n硬件\n10000人以上\n校招高薪榜\n工资高",
+      "title": "产品经理",
       "city": "北京",
       "batch": "2027 秋招",
-      "url": "https://www.nowcoder.com/jobs/detail/30300000146154?deliverSource=1&pageSource=5001&channel=npJobTab&logid=bd4211736efb8a63b4bb5d0737651905",
-      "publishedAt": "2026-09-21T02:45:07.938638+00:00",
+      "url": "https://www.nowcoder.com/jobs/detail/460858?deliverSource=1&pageSource=5001&channel=npJobTab&logid=0b60cd463947c7526e034c4117e00039",
+      "publishedAt": "2026-09-22T02:46:01.637770+00:00",
       "deadline": "",
       "source": "牛客网·校招职位",
       "verification": "待核验",
@@ -317,7 +317,24 @@
       "notes": "",
       "target": false,
       "priorityKind": "",
-      "createdAt": "2026-09-21T02:45:08.236778+00:00"
+      "createdAt": "2026-09-22T02:46:01.985001+00:00"
+    },
+    {
+      "id": "nc-pw-30300000146154",
+      "company": "联想\n数据服务\n10000人以上\n校招高薪榜",
+      "title": "产品经理-AI方向-内推码DNK2026",
+      "city": "北京",
+      "batch": "2027 秋招",
+      "url": "https://www.nowcoder.com/jobs/detail/30300000146154?deliverSource=1&pageSource=5001&channel=npJobTab&logid=0b60cd463947c7526e034c4117e00039",
+      "publishedAt": "2026-09-22T02:46:01.682972+00:00",
+      "deadline": "",
+      "source": "牛客网·校招职位",
+      "verification": "待核验",
+      "status": "待投递",
+      "notes": "",
+      "target": false,
+      "priorityKind": "",
+      "createdAt": "2026-09-22T02:46:01.985019+00:00"
     },
     {
       "id": "nc-pw-465134",
@@ -403,23 +420,6 @@
       "target": false,
       "priorityKind": "",
       "createdAt": "2026-09-15T02:51:09.861329+00:00"
-    },
-    {
-      "id": "nc-pw-460858",
-      "company": "华为HUAWEI\n硬件\n10000人以上\n校招高薪榜\n工资高",
-      "title": "产品经理",
-      "city": "北京",
-      "batch": "2027 秋招",
-      "url": "https://www.nowcoder.com/jobs/detail/460858?deliverSource=1&pageSource=5001&channel=npJobTab&logid=5bddc2faedbfdec8e108805aaa9b5665",
-      "publishedAt": "2026-09-09T02:30:38.542996+00:00",
-      "deadline": "",
-      "source": "牛客网·校招职位",
-      "verification": "待核验",
-      "status": "待投递",
-      "notes": "",
-      "target": false,
-      "priorityKind": "",
-      "createdAt": "2026-09-09T02:30:38.726039+00:00"
     },
     {
       "id": "nc-pw-465386",
