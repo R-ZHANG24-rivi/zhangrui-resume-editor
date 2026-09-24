@@ -1,5 +1,5 @@
 {
-  "exportedAt": "2026-09-23T02:48:13.437079+00:00",
+  "exportedAt": "2026-09-24T02:38:08.257367+00:00",
   "focus": "北京 · 交互/视觉/AIGC/产品设计 · 互联网大厂/AI公司/外企",
   "jobs": [
     {
@@ -67,6 +67,23 @@
       "priorityKind": "外企"
     },
     {
+      "id": "nc-pw-443976",
+      "company": "美团\n互联网综合\n10000人以上\n校招高薪榜",
+      "title": "AI产品经理（加急）",
+      "city": "北京",
+      "batch": "2027 秋招",
+      "url": "https://www.nowcoder.com/jobs/detail/443976?deliverSource=1&pageSource=5001&channel=npJobTab&logid=cd139573774f25eb7efd2a768114a3bc",
+      "publishedAt": "2026-09-24T02:36:09.513355+00:00",
+      "deadline": "",
+      "source": "牛客网·校招职位",
+      "verification": "待核验",
+      "status": "待投递",
+      "notes": "",
+      "target": true,
+      "priorityKind": "互联网大厂",
+      "createdAt": "2026-09-24T02:36:09.794230+00:00"
+    },
+    {
       "id": "nc-pw-458792",
       "company": "小米集团\n硬件\n10000人以上\n校招高薪榜\n氛围很好",
       "title": "ai产品经理",
@@ -82,23 +99,6 @@
       "target": true,
       "priorityKind": "互联网大厂",
       "createdAt": "2026-09-23T02:46:32.729242+00:00"
-    },
-    {
-      "id": "nc-pw-443976",
-      "company": "美团\n互联网综合\n10000人以上\n校招高薪榜",
-      "title": "AI产品经理（加急）",
-      "city": "北京",
-      "batch": "2027 秋招",
-      "url": "https://www.nowcoder.com/jobs/detail/443976?deliverSource=1&pageSource=5001&channel=npJobTab&logid=4776f91e37513f29b5383f8ac7fb0815",
-      "publishedAt": "2026-09-15T02:51:09.517148+00:00",
-      "deadline": "",
-      "source": "牛客网·校招职位",
-      "verification": "待核验",
-      "status": "待投递",
-      "notes": "",
-      "target": true,
-      "priorityKind": "互联网大厂",
-      "createdAt": "2026-09-15T02:51:09.861311+00:00"
     },
     {
       "id": "nc-pw-456907",
@@ -308,8 +308,8 @@
       "title": "产品经理-AI方向-内推码DNK2026",
       "city": "北京",
       "batch": "2027 秋招",
-      "url": "https://www.nowcoder.com/jobs/detail/30300000146154?deliverSource=1&pageSource=5001&channel=npJobTab&logid=f768799e8ba6c40fddb8a437064176ca",
-      "publishedAt": "2026-09-23T02:46:32.430553+00:00",
+      "url": "https://www.nowcoder.com/jobs/detail/30300000146154?deliverSource=1&pageSource=5001&channel=npJobTab&logid=cd139573774f25eb7efd2a768114a3bc",
+      "publishedAt": "2026-09-24T02:36:09.537144+00:00",
       "deadline": "",
       "source": "牛客网·校招职位",
       "verification": "待核验",
@@ -317,7 +317,7 @@
       "notes": "",
       "target": false,
       "priorityKind": "",
-      "createdAt": "2026-09-23T02:46:32.729260+00:00"
+      "createdAt": "2026-09-24T02:36:09.794248+00:00"
     },
     {
       "id": "nc-pw-460858",
