@@ -1,5 +1,5 @@
 {
-  "exportedAt": "2026-10-03T03:17:27.740191+00:00",
+  "exportedAt": "2026-10-04T03:45:31.242193+00:00",
   "focus": "北京 · 交互/视觉/AIGC/产品设计 · 互联网大厂/AI公司/外企",
   "jobs": [
     {
@@ -303,6 +303,40 @@
       "createdAt": "2026-08-11T11:23:36.478336+00:00"
     },
     {
+      "id": "nc-pw-30300000146154",
+      "company": "联想\n数据服务\n10000人以上\n校招高薪榜",
+      "title": "产品经理-AI方向-内推码DNK2026",
+      "city": "北京",
+      "batch": "2027 秋招",
+      "url": "https://www.nowcoder.com/jobs/detail/30300000146154?deliverSource=1&pageSource=5001&channel=npJobTab&logid=9d14b0b986c1e6d24f813270a9e14633",
+      "publishedAt": "2026-10-04T03:43:43.939789+00:00",
+      "deadline": "",
+      "source": "牛客网·校招职位",
+      "verification": "待核验",
+      "status": "待投递",
+      "notes": "",
+      "target": false,
+      "priorityKind": "",
+      "createdAt": "2026-10-04T03:43:44.140331+00:00"
+    },
+    {
+      "id": "nc-pw-465677",
+      "company": "众安保险",
+      "title": "[2027届秋招-上海]互联网产品经理",
+      "city": "北京",
+      "batch": "2027 秋招",
+      "url": "https://www.nowcoder.com/jobs/detail/465677?deliverSource=2&pageSource=5003",
+      "publishedAt": "2026-10-04T03:43:44.026915+00:00",
+      "deadline": "",
+      "source": "牛客网·校招职位",
+      "verification": "待核验",
+      "status": "待投递",
+      "notes": "",
+      "target": false,
+      "priorityKind": "",
+      "createdAt": "2026-10-04T03:43:44.140352+00:00"
+    },
+    {
       "id": "nc-pw-465682",
       "company": "众安保险",
       "title": "[27届秋招-上海]AI产品经理",
@@ -318,40 +352,6 @@
       "target": false,
       "priorityKind": "",
       "createdAt": "2026-10-03T03:15:29.858899+00:00"
-    },
-    {
-      "id": "nc-pw-30300000146154",
-      "company": "联想\n数据服务\n10000人以上\n校招高薪榜",
-      "title": "产品经理-AI方向-内推码DNK2026",
-      "city": "北京",
-      "batch": "2027 秋招",
-      "url": "https://www.nowcoder.com/jobs/detail/30300000146154?deliverSource=1&pageSource=5001&channel=npJobTab&logid=2689870e0c5acc38a541012b1b3038ba",
-      "publishedAt": "2026-10-02T03:31:06.223646+00:00",
-      "deadline": "",
-      "source": "牛客网·校招职位",
-      "verification": "待核验",
-      "status": "待投递",
-      "notes": "",
-      "target": false,
-      "priorityKind": "",
-      "createdAt": "2026-10-02T03:31:06.462749+00:00"
-    },
-    {
-      "id": "nc-pw-465677",
-      "company": "众安保险",
-      "title": "[2027届秋招-上海]互联网产品经理",
-      "city": "北京",
-      "batch": "2027 秋招",
-      "url": "https://www.nowcoder.com/jobs/detail/465677?deliverSource=2&pageSource=5003",
-      "publishedAt": "2026-10-01T03:30:53.253259+00:00",
-      "deadline": "",
-      "source": "牛客网·校招职位",
-      "verification": "待核验",
-      "status": "待投递",
-      "notes": "",
-      "target": false,
-      "priorityKind": "",
-      "createdAt": "2026-10-01T03:30:53.326758+00:00"
     },
     {
       "id": "nc-pw-460858",
