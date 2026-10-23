@@ -1,5 +1,5 @@
 {
-  "exportedAt": "2026-10-22T02:50:00.775036+00:00",
+  "exportedAt": "2026-10-23T02:54:14.758917+00:00",
   "focus": "北京 · 交互/视觉/AIGC/产品设计 · 互联网大厂/AI公司/外企",
   "jobs": [
     {
@@ -320,13 +320,13 @@
       "createdAt": "2026-08-11T11:23:36.478336+00:00"
     },
     {
-      "id": "nc-pw-470179",
-      "company": "阅文集团\n文娱内容\n1000-9999人\n学历友好榜",
-      "title": "产品经理（AI方向）",
+      "id": "nc-pw-471650",
+      "company": "万兴科技\n企业服务\n1000-9999人",
+      "title": "产品策划经理(J14807)",
       "city": "北京",
       "batch": "2027 秋招",
-      "url": "https://www.nowcoder.com/jobs/detail/470179?deliverSource=1&pageSource=5001&channel=npJobTab&logid=643652d51a0234439e3cf2bc30e75b48",
-      "publishedAt": "2026-10-22T02:48:40.044514+00:00",
+      "url": "https://www.nowcoder.com/jobs/detail/471650?deliverSource=1&pageSource=5001&channel=npJobTab&logid=5fb3e47d79341de306de9023bdb85f37",
+      "publishedAt": "2026-10-23T02:52:35.084968+00:00",
       "deadline": "",
       "source": "牛客网·校招职位",
       "verification": "待核验",
@@ -334,7 +334,24 @@
       "notes": "",
       "target": false,
       "priorityKind": "",
-      "createdAt": "2026-10-22T02:48:40.574633+00:00"
+      "createdAt": "2026-10-23T02:52:35.617171+00:00"
+    },
+    {
+      "id": "nc-pw-470179",
+      "company": "阅文集团\n文娱内容\n1000-9999人\n学历友好榜",
+      "title": "产品经理（AI方向）",
+      "city": "北京",
+      "batch": "2027 秋招",
+      "url": "https://www.nowcoder.com/jobs/detail/470179?deliverSource=1&pageSource=5001&channel=npJobTab&logid=5fb3e47d79341de306de9023bdb85f37",
+      "publishedAt": "2026-10-23T02:52:35.114678+00:00",
+      "deadline": "",
+      "source": "牛客网·校招职位",
+      "verification": "待核验",
+      "status": "待投递",
+      "notes": "",
+      "target": false,
+      "priorityKind": "",
+      "createdAt": "2026-10-23T02:52:35.617188+00:00"
     },
     {
       "id": "nc-pw-460858",
