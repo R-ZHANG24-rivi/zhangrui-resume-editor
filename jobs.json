@@ -1,5 +1,5 @@
 {
-  "exportedAt": "2026-11-09T04:01:07.556507+00:00",
+  "exportedAt": "2026-11-10T05:34:24.456206+00:00",
   "focus": "北京 · 交互/视觉/AIGC/产品设计 · 互联网大厂/AI公司/外企",
   "jobs": [
     {
@@ -369,6 +369,23 @@
       "target": false,
       "priorityKind": "",
       "createdAt": "2026-08-11T11:23:36.478336+00:00"
+    },
+    {
+      "id": "nc-pw-468630",
+      "company": "UCloud",
+      "title": "2027校招-产品运营",
+      "city": "北京",
+      "batch": "2027 秋招",
+      "url": "https://www.nowcoder.com/jobs/detail/468630?deliverSource=2&pageSource=5003",
+      "publishedAt": "2026-11-10T05:32:29.128815+00:00",
+      "deadline": "",
+      "source": "牛客网·校招职位",
+      "verification": "待核验",
+      "status": "待投递",
+      "notes": "",
+      "target": false,
+      "priorityKind": "",
+      "createdAt": "2026-11-10T05:32:29.246534+00:00"
     },
     {
       "id": "nc-pw-474854",
