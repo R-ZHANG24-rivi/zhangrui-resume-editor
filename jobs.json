@@ -1,5 +1,5 @@
 {
-  "exportedAt": "2026-11-10T05:34:24.456206+00:00",
+  "exportedAt": "2026-11-11T04:06:25.264066+00:00",
   "focus": "北京 · 交互/视觉/AIGC/产品设计 · 互联网大厂/AI公司/外企",
   "jobs": [
     {
@@ -371,6 +371,23 @@
       "createdAt": "2026-08-11T11:23:36.478336+00:00"
     },
     {
+      "id": "nc-pw-396475",
+      "company": "声网\n企业服务\n500-999人\n高新技术",
+      "title": "校招-产品经理",
+      "city": "北京",
+      "batch": "2027 秋招",
+      "url": "https://www.nowcoder.com/jobs/detail/396475?deliverSource=1&pageSource=5001&channel=npJobTab&logid=ff630076719ee73fd9ce1e92d3ec01b1",
+      "publishedAt": "2026-11-11T04:04:23.394771+00:00",
+      "deadline": "",
+      "source": "牛客网·校招职位",
+      "verification": "待核验",
+      "status": "待投递",
+      "notes": "",
+      "target": false,
+      "priorityKind": "",
+      "createdAt": "2026-11-11T04:04:23.691216+00:00"
+    },
+    {
       "id": "nc-pw-468630",
       "company": "UCloud",
       "title": "2027校招-产品运营",
@@ -709,23 +726,6 @@
       "target": false,
       "priorityKind": "",
       "createdAt": "2026-10-11T03:19:12.462292+00:00"
-    },
-    {
-      "id": "nc-pw-396475",
-      "company": "声网\n企业服务\n500-999人\n高新技术",
-      "title": "校招-产品经理",
-      "city": "北京",
-      "batch": "2027 秋招",
-      "url": "https://www.nowcoder.com/jobs/detail/396475?deliverSource=1&pageSource=5001&channel=npJobTab&logid=9ff0de00cc49061104218b08d5f91434",
-      "publishedAt": "2026-10-09T04:00:49.257915+00:00",
-      "deadline": "",
-      "source": "牛客网·校招职位",
-      "verification": "待核验",
-      "status": "待投递",
-      "notes": "",
-      "target": false,
-      "priorityKind": "",
-      "createdAt": "2026-10-09T04:00:49.444057+00:00"
     },
     {
       "id": "nc-pw-465677",
