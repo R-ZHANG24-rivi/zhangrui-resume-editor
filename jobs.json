@@ -1,5 +1,5 @@
 {
-  "exportedAt": "2026-11-14T04:29:06.791152+00:00",
+  "exportedAt": "2026-11-15T04:15:10.132187+00:00",
   "focus": "北京 · 交互/视觉/AIGC/产品设计 · 互联网大厂/AI公司/外企",
   "jobs": [
     {
@@ -67,6 +67,23 @@
       "priorityKind": "外企"
     },
     {
+      "id": "nc-pw-472021",
+      "company": "哔哩哔哩\n文娱内容\n1000-9999人\n学历友好榜",
+      "title": "Ai产品经理",
+      "city": "北京",
+      "batch": "2027 秋招",
+      "url": "https://www.nowcoder.com/jobs/detail/472021?deliverSource=1&pageSource=5001&channel=npJobTab&logid=fa0e226d5d69e6815b5d373b39ad4cef",
+      "publishedAt": "2026-11-15T04:13:06.537758+00:00",
+      "deadline": "",
+      "source": "牛客网·校招职位",
+      "verification": "待核验",
+      "status": "待投递",
+      "notes": "",
+      "target": true,
+      "priorityKind": "互联网大厂",
+      "createdAt": "2026-11-15T04:13:07.103645+00:00"
+    },
+    {
       "id": "nc-pw-471929",
       "company": "京东\n电商\n10000人以上\n校招高薪榜\n股权激励",
       "title": "产品经理",
@@ -82,23 +99,6 @@
       "target": true,
       "priorityKind": "互联网大厂",
       "createdAt": "2026-11-14T04:27:41.939821+00:00"
-    },
-    {
-      "id": "nc-pw-472021",
-      "company": "哔哩哔哩\n文娱内容\n1000-9999人\n学历友好榜",
-      "title": "Ai产品经理",
-      "city": "北京",
-      "batch": "2027 秋招",
-      "url": "https://www.nowcoder.com/jobs/detail/472021?deliverSource=1&pageSource=5001&channel=npJobTab&logid=ff744fe2cb221f83f7c36cec5ded2ada",
-      "publishedAt": "2026-11-08T03:47:21.275019+00:00",
-      "deadline": "",
-      "source": "牛客网·校招职位",
-      "verification": "待核验",
-      "status": "待投递",
-      "notes": "",
-      "target": true,
-      "priorityKind": "互联网大厂",
-      "createdAt": "2026-11-08T03:47:21.773118+00:00"
     },
     {
       "id": "nc-pw-443976",
