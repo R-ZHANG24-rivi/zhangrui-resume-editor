@@ -1,5 +1,5 @@
 {
-  "exportedAt": "2026-11-20T05:15:02.308568+00:00",
+  "exportedAt": "2026-11-21T05:07:32.686383+00:00",
   "focus": "北京 · 交互/视觉/AIGC/产品设计 · 互联网大厂/AI公司/外企",
   "jobs": [
     {
@@ -67,13 +67,13 @@
       "priorityKind": "外企"
     },
     {
-      "id": "nc-pw-342348",
-      "company": "美团\n互联网综合\n10000人以上\n校招高薪榜",
-      "title": "产品经理（补录）",
+      "id": "nc-pw-472021",
+      "company": "哔哩哔哩\n文娱内容\n1000-9999人\n学历友好榜",
+      "title": "Ai产品经理",
       "city": "北京",
       "batch": "2027 秋招",
-      "url": "https://www.nowcoder.com/jobs/detail/342348?deliverSource=1&pageSource=5001&channel=npJobTab&logid=091253090ebcc3b5e2be0b33ec8b84ef",
-      "publishedAt": "2026-11-20T05:12:56.824183+00:00",
+      "url": "https://www.nowcoder.com/jobs/detail/472021?deliverSource=1&pageSource=5001&channel=npJobTab&logid=b766f27410eeecd3d2ad39cff0ad14c0",
+      "publishedAt": "2026-11-21T05:05:32.199108+00:00",
       "deadline": "",
       "source": "牛客网·校招职位",
       "verification": "待核验",
@@ -81,7 +81,24 @@
       "notes": "",
       "target": true,
       "priorityKind": "互联网大厂",
-      "createdAt": "2026-11-20T05:12:57.143015+00:00"
+      "createdAt": "2026-11-21T05:05:32.601615+00:00"
+    },
+    {
+      "id": "nc-pw-342348",
+      "company": "美团\n互联网综合\n10000人以上\n校招高薪榜",
+      "title": "产品经理（补录）",
+      "city": "北京",
+      "batch": "2027 秋招",
+      "url": "https://www.nowcoder.com/jobs/detail/342348?deliverSource=1&pageSource=5001&channel=npJobTab&logid=b766f27410eeecd3d2ad39cff0ad14c0",
+      "publishedAt": "2026-11-21T05:05:32.381232+00:00",
+      "deadline": "",
+      "source": "牛客网·校招职位",
+      "verification": "待核验",
+      "status": "待投递",
+      "notes": "",
+      "target": true,
+      "priorityKind": "互联网大厂",
+      "createdAt": "2026-11-21T05:05:32.601639+00:00"
     },
     {
       "id": "nc-pw-443976",
@@ -99,23 +116,6 @@
       "target": true,
       "priorityKind": "互联网大厂",
       "createdAt": "2026-11-19T05:26:19.656231+00:00"
-    },
-    {
-      "id": "nc-pw-472021",
-      "company": "哔哩哔哩\n文娱内容\n1000-9999人\n学历友好榜",
-      "title": "Ai产品经理",
-      "city": "北京",
-      "batch": "2027 秋招",
-      "url": "https://www.nowcoder.com/jobs/detail/472021?deliverSource=1&pageSource=5001&channel=npJobTab&logid=fa0e226d5d69e6815b5d373b39ad4cef",
-      "publishedAt": "2026-11-15T04:13:06.537758+00:00",
-      "deadline": "",
-      "source": "牛客网·校招职位",
-      "verification": "待核验",
-      "status": "待投递",
-      "notes": "",
-      "target": true,
-      "priorityKind": "互联网大厂",
-      "createdAt": "2026-11-15T04:13:07.103645+00:00"
     },
     {
       "id": "nc-pw-471929",
@@ -388,6 +388,40 @@
       "createdAt": "2026-08-11T11:23:36.478336+00:00"
     },
     {
+      "id": "nc-pw-470226",
+      "company": "北森",
+      "title": "2027届校招-软件产品经理（北京、成都）(J14870)",
+      "city": "北京",
+      "batch": "2027 秋招",
+      "url": "https://www.nowcoder.com/jobs/detail/470226?deliverSource=2&pageSource=5003",
+      "publishedAt": "2026-11-21T05:05:32.496035+00:00",
+      "deadline": "",
+      "source": "牛客网·校招职位",
+      "verification": "待核验",
+      "status": "待投递",
+      "notes": "",
+      "target": false,
+      "priorityKind": "",
+      "createdAt": "2026-11-21T05:05:32.601645+00:00"
+    },
+    {
+      "id": "nc-pw-470279",
+      "company": "税友集团",
+      "title": "AI产品经理（财税业务）",
+      "city": "北京",
+      "batch": "2027 秋招",
+      "url": "https://www.nowcoder.com/jobs/detail/470279?deliverSource=2&pageSource=5003",
+      "publishedAt": "2026-11-21T05:05:32.530717+00:00",
+      "deadline": "",
+      "source": "牛客网·校招职位",
+      "verification": "待核验",
+      "status": "待投递",
+      "notes": "",
+      "target": false,
+      "priorityKind": "",
+      "createdAt": "2026-11-21T05:05:32.601650+00:00"
+    },
+    {
       "id": "nc-pw-470126",
       "company": "北森",
       "title": "2027届校招-测评产品经理（北京）(J14862)",
@@ -403,23 +437,6 @@
       "target": false,
       "priorityKind": "",
       "createdAt": "2026-11-20T05:12:57.143037+00:00"
-    },
-    {
-      "id": "nc-pw-470226",
-      "company": "北森",
-      "title": "2027届校招-软件产品经理（北京、成都）(J14870)",
-      "city": "北京",
-      "batch": "2027 秋招",
-      "url": "https://www.nowcoder.com/jobs/detail/470226?deliverSource=2&pageSource=5003",
-      "publishedAt": "2026-11-20T05:12:57.078226+00:00",
-      "deadline": "",
-      "source": "牛客网·校招职位",
-      "verification": "待核验",
-      "status": "待投递",
-      "notes": "",
-      "target": false,
-      "priorityKind": "",
-      "createdAt": "2026-11-20T05:12:57.143042+00:00"
     },
     {
       "id": "nc-pw-469521",
