@@ -1,5 +1,5 @@
 {
-  "exportedAt": "2026-11-21T05:07:32.686383+00:00",
+  "exportedAt": "2026-11-22T04:32:34.657072+00:00",
   "focus": "北京 · 交互/视觉/AIGC/产品设计 · 互联网大厂/AI公司/外企",
   "jobs": [
     {
@@ -67,30 +67,13 @@
       "priorityKind": "外企"
     },
     {
-      "id": "nc-pw-472021",
-      "company": "哔哩哔哩\n文娱内容\n1000-9999人\n学历友好榜",
-      "title": "Ai产品经理",
-      "city": "北京",
-      "batch": "2027 秋招",
-      "url": "https://www.nowcoder.com/jobs/detail/472021?deliverSource=1&pageSource=5001&channel=npJobTab&logid=b766f27410eeecd3d2ad39cff0ad14c0",
-      "publishedAt": "2026-11-21T05:05:32.199108+00:00",
-      "deadline": "",
-      "source": "牛客网·校招职位",
-      "verification": "待核验",
-      "status": "待投递",
-      "notes": "",
-      "target": true,
-      "priorityKind": "互联网大厂",
-      "createdAt": "2026-11-21T05:05:32.601615+00:00"
-    },
-    {
       "id": "nc-pw-342348",
       "company": "美团\n互联网综合\n10000人以上\n校招高薪榜",
       "title": "产品经理（补录）",
       "city": "北京",
       "batch": "2027 秋招",
-      "url": "https://www.nowcoder.com/jobs/detail/342348?deliverSource=1&pageSource=5001&channel=npJobTab&logid=b766f27410eeecd3d2ad39cff0ad14c0",
-      "publishedAt": "2026-11-21T05:05:32.381232+00:00",
+      "url": "https://www.nowcoder.com/jobs/detail/342348?deliverSource=1&pageSource=5001&channel=npJobTab&logid=989d8067a9eba48dcd914ebe89cd299a",
+      "publishedAt": "2026-11-22T04:30:38.388835+00:00",
       "deadline": "",
       "source": "牛客网·校招职位",
       "verification": "待核验",
@@ -98,7 +81,24 @@
       "notes": "",
       "target": true,
       "priorityKind": "互联网大厂",
-      "createdAt": "2026-11-21T05:05:32.601639+00:00"
+      "createdAt": "2026-11-22T04:30:38.857834+00:00"
+    },
+    {
+      "id": "nc-pw-472021",
+      "company": "哔哩哔哩\n文娱内容\n1000-9999人\n学历友好榜",
+      "title": "Ai产品经理",
+      "city": "北京",
+      "batch": "2027 秋招",
+      "url": "https://www.nowcoder.com/jobs/detail/472021?deliverSource=1&pageSource=5001&channel=npJobTab&logid=989d8067a9eba48dcd914ebe89cd299a",
+      "publishedAt": "2026-11-22T04:30:38.474726+00:00",
+      "deadline": "",
+      "source": "牛客网·校招职位",
+      "verification": "待核验",
+      "status": "待投递",
+      "notes": "",
+      "target": true,
+      "priorityKind": "互联网大厂",
+      "createdAt": "2026-11-22T04:30:38.857850+00:00"
     },
     {
       "id": "nc-pw-443976",
@@ -106,8 +106,8 @@
       "title": "AI产品经理（加急）",
       "city": "北京",
       "batch": "2027 秋招",
-      "url": "https://www.nowcoder.com/jobs/detail/443976?deliverSource=1&pageSource=5001&channel=npJobTab&logid=7aeae3c701dbbf9089bfa0c55d357c01",
-      "publishedAt": "2026-11-19T05:26:19.278632+00:00",
+      "url": "https://www.nowcoder.com/jobs/detail/443976?deliverSource=1&pageSource=5001&channel=npJobTab&logid=989d8067a9eba48dcd914ebe89cd299a",
+      "publishedAt": "2026-11-22T04:30:38.561989+00:00",
       "deadline": "",
       "source": "牛客网·校招职位",
       "verification": "待核验",
@@ -115,7 +115,7 @@
       "notes": "",
       "target": true,
       "priorityKind": "互联网大厂",
-      "createdAt": "2026-11-19T05:26:19.656231+00:00"
+      "createdAt": "2026-11-22T04:30:38.857854+00:00"
     },
     {
       "id": "nc-pw-471929",
@@ -284,6 +284,23 @@
       "notes": "云产品线",
       "target": true,
       "priorityKind": "互联网大厂"
+    },
+    {
+      "id": "nc-pw-470127",
+      "company": "北森",
+      "title": "2027届校招-UX设计师（北京）(J14834)",
+      "city": "北京",
+      "batch": "2027 秋招",
+      "url": "https://www.nowcoder.com/jobs/detail/470127?deliverSource=2&pageSource=5003",
+      "publishedAt": "2026-11-22T04:30:38.784525+00:00",
+      "deadline": "",
+      "source": "牛客网·校招职位",
+      "verification": "待核验",
+      "status": "待投递",
+      "notes": "",
+      "target": false,
+      "priorityKind": "",
+      "createdAt": "2026-11-22T04:30:38.857856+00:00"
     },
     {
       "id": "nc-pw-467739",
